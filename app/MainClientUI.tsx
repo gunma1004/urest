@@ -15,7 +15,7 @@ const evasionKeywords = [
   "방문 스포츠 마사지", "홈스포츠 마사지", "여성전용 출장 마사지", "커플 출장 마사지", "심야 출장 마사지"
 ];
 
-// 🌟 서울·경기·인천 전지역 데이터 (요청하신 모든 시/구 완벽 반영)
+// 🌟 서울·경기·인천 전지역 데이터
 export const regionData: Record<string, { name: string; districts: Record<string, { name: string; dongs: string[] }> }> = {
   seoul: {
     name: "서울특별시",
@@ -107,14 +107,14 @@ export const regionData: Record<string, { name: string; districts: Record<string
       bupyeong: { name: "부평구", dongs: ["부평동", "산곡동", "청천동", "갈산동", "삼산동", "부개동", "일신동", "십정동"] },
       gyeyang: { name: "계양구", dongs: ["효성동", "계산동", "작전동", "작전서운동", "계양동"] },
       seohae: { name: "서해구", dongs: ["연희동", "청라동", "가정동", "신현원창동", "석남동", "가좌동"] },
-      geomdan: { name: "검단구", dongs: ["검단동", "불로대곡동", "원당동", "당하동", "오류왕길동", "마전동", "아라동"] },
+      geomdan: { name: "검단동", dongs: ["검단동", "불로대곡동", "원당동", "당하동", "오류왕길동", "마전동", "아라동"] },
       ganghwa: { name: "강화군", dongs: ["강화읍", "선원면", "불은면", "길상면", "화도면", "양도면", "내가면", "하점면", "양사면", "송해면", "교동면", "삼산면", "서도면"] },
       ongjin: { name: "옹진군", dongs: ["북도면", "연평면", "백령면", "대청면", "덕적면", "자월면", "영흥면"] }
     }
   }
 };
 
-// 5개 공식 제휴 업체 데이터
+// 🌟 public 폴더 내 실제 이미지 파일명에 맞춘 5개 제휴 업체 데이터
 const verifiedShopsData = [
   {
     id: 1,
@@ -123,7 +123,7 @@ const verifiedShopsData = [
     desc: "서울 및 수도권 전역 신속 매칭. 굳은 근육을 부드럽게 이완하는 건식 타이 & 딥 릴렉스 전문 센터",
     phone: "0507-1280-3303",
     price: "80,000원부터~",
-    image: "/assets/images/partners/shop-01.webp"
+    image: "/shop1.jpg"
   },
   {
     id: 2,
@@ -132,7 +132,7 @@ const verifiedShopsData = [
     desc: "천연 에센셜 오일과 정교한 핸드 테크닉. 몸과 마음을 편안하게 감싸주는 프리미엄 아로마 바디 순환 케어",
     phone: "0507-1280-3303",
     price: "80,000원부터~",
-    image: "/assets/images/partners/shop-02.webp"
+    image: "/shop2.jpg"
   },
   {
     id: 3,
@@ -141,7 +141,7 @@ const verifiedShopsData = [
     desc: "타이와 아로마를 결합한 VIP 시그니처 힐링 프로그램. 커플 및 2인 동시 케어 전문 스케줄 지원",
     phone: "0507-1280-3361",
     price: "80,000원부터~",
-    image: "/assets/images/partners/shop-03.webp"
+    image: "/shop3.jpg"
   },
   {
     id: 4,
@@ -150,7 +150,7 @@ const verifiedShopsData = [
     desc: "100% 현장 결제 원칙! 야간 및 심야 시간대 빠른 배정과 지친 하루 끝 완벽한 휴식을 선사하는 맞춤 케어",
     phone: "0507-1280-3223",
     price: "80,000원부터~",
-    image: "/assets/images/partners/shop-04.webp"
+    image: "/shop4.jpg"
   },
   {
     id: 5,
@@ -159,7 +159,7 @@ const verifiedShopsData = [
     desc: "자택 및 숙박 호텔 전담 케어. 철저한 위생 수칙 준수와 프라이버시를 보장하는 1:1 VIP 웰니스 프로그램",
     phone: "0507-1280-3334",
     price: "80,000원부터~",
-    image: "/assets/images/partners/shop-05.webp"
+    image: "/shop5.jpg"
   }
 ];
 
@@ -245,7 +245,6 @@ export default function MainClientUI() {
             {rollingKeywords.map((kw, idx) => (
               <span key={idx} className="hover:text-amber-400 cursor-default transition-colors">#{kw}</span>
             ))}
-            {/* 자연스러운 롤링을 위해 한 번 더 반복 */}
             {rollingKeywords.map((kw, idx) => (
               <span key={`dup-${idx}`} className="hover:text-amber-400 cursor-default transition-colors">#{kw}</span>
             ))}
@@ -264,12 +263,12 @@ export default function MainClientUI() {
 
       <main className="max-w-4xl mx-auto px-4 py-8 w-full flex-1 space-y-12">
         
-        {/* 1. 상단 히어로 메인 배너 */}
+        {/* 1. 상단 히어로 메인 배너 (banner.jpg 연결) */}
         <section className="text-center my-2">
           <div className="overflow-hidden rounded-3xl border border-amber-500/30 shadow-[0_0_40px_rgba(245,158,11,0.15)] relative h-64 md:h-84 flex items-center justify-center p-6 bg-gradient-to-b from-neutral-900 to-[#08080a]">
             <div className="absolute inset-0 z-0">
               <img 
-                src="/assets/images/og-main.webp" 
+                src="/banner.jpg" 
                 alt="유레스트 프리미엄 웰니스 케어 배너" 
                 className="w-full h-full object-cover filter brightness-[0.35] scale-105"
               />
