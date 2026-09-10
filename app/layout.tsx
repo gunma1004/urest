@@ -1,3 +1,7 @@
+import type { Metadata } from "next";
+import "./globals.css";
+import NavigationHeader from "./NavigationHeader";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://urest-kr.netlify.app"),
   title: {
@@ -24,7 +28,6 @@ export const metadata: Metadata = {
   },
   verification: {
     other: {
-      // 🌟 네이버 서치어드바이저 인증 코드 적용 완료
       "naver-site-verification": "feb5dd2e768f90369090ec09143b9fb05c3f437a",
     },
   },
@@ -56,3 +59,18 @@ export const metadata: Metadata = {
     },
   },
 };
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="ko">
+      <body className="bg-[#08080a] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black">
+        <NavigationHeader />
+        {children}
+      </body>
+    </html>
+  );
+}
