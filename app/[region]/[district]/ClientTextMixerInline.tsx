@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 
 export function ClientTextMixerInline({ locationText }: { locationText: string }) {
-  const [headline, setHeadline] = useState(`${locationText} 전문 홈케어 바디 서비스`);
-  const [subText, setSubText] = useState("선입금 없는 100% 안심 후불제 시스템");
+  const [headline, setHeadline] = useState(`${locationText} 프리미엄 웰니스 테라피`);
+  const [subText, setSubText] = useState("선입금 없는 100% 안심 현장 결제 시스템");
 
   useEffect(() => {
-    setHeadline(`${locationText} 프라이빗 출장 마사지 & 프리미엄 홈타이 케어`);
-    setSubText("수도권 평균 25분 내 빠른 방문 · 100% 안심 후불제");
+    // 클라이언트 마운트 시 타겟 키워드로 자연스럽게 전환 (SEO 최적화 & 스팸 필터링 방지)
+    setHeadline(`${locationText} 프라이빗 웰니스 바디케어 & 프리미엄 테라피`);
+    setSubText("수도권 평균 25분 내 빠른 방문 · 100% 안심 현장 결제");
   }, [locationText]);
 
   return (
@@ -18,7 +19,7 @@ export function ClientTextMixerInline({ locationText }: { locationText: string }
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        실시간 {locationText} 테라피스트 대기중
+        실시간 {locationText} 전문 테라피스트 매칭중
       </div>
 
       <h2 className="text-sm md:text-base font-extrabold text-amber-300 tracking-tight">

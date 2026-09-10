@@ -20,12 +20,12 @@ export const metadata: Metadata = {
     "프리미엄스파"
   ],
   alternates: {
-    canonical: "https://urest.netlify.app",
+    canonical: "https://urest-kr.netlify.app",
   },
   openGraph: {
     title: "유레스트(Urest) | 서울·경기·인천 프리미엄 테라피 플랫폼",
     description: "내 주변 검증된 프리미엄 테라피 센터 정보 총집합! 온전한 휴식을 위한 맞춤 웰니스 케어를 유레스트에서 만나보세요.",
-    url: "https://urest.netlify.app",
+    url: "https://urest-kr.netlify.app",
     siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",

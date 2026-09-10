@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     "경기 테라피 리뷰"
   ],
   alternates: {
-    canonical: "https://urest.netlify.app/reviews",
+    canonical: "https://urest-kr.netlify.app/reviews",
   },
   openGraph: {
     title: "실제 고객 생생후기 | 유레스트(Urest) 검증된 100% 솔직 리뷰",
     description: "선입금 없는 안심 현장 결제와 빠른 방문! 서울·경기·인천 고객님들이 직접 작성한 생생한 피로회복 후기를 만나보세요.",
-    url: "https://urest.netlify.app/reviews",
+    url: "https://urest-kr.netlify.app/reviews",
     siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",

@@ -13,12 +13,12 @@ export const metadata: Metadata = {
     "웰니스 푸드"
   ],
   alternates: {
-    canonical: "https://urest.netlify.app/places",
+    canonical: "https://urest-kr.netlify.app/places",
   },
   openGraph: {
     title: "주변 제휴명소 & 맛집·숙소 안내 | 유레스트(Urest)",
     description: "테라피와 함께 즐기는 서울·경기·인천 핫플레이스! 검증된 맛집과 편안한 휴식처를 한눈에 만나보세요.",
-    url: "https://urest.netlify.app/places",
+    url: "https://urest-kr.netlify.app/places",
     siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",

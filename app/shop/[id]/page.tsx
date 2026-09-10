@@ -259,12 +259,12 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     title: `${shop.name} 코스 및 가격 안내 | 유레스트(Urest) 24시 제휴`,
     description: `${shop.name} 24시 안심 방문 테라피! 선입금 없는 100% 현장 결제, 코스별 가격비교 및 신속 예약 정보를 유레스트에서 확인하세요.`,
     alternates: {
-      canonical: `https://urest.netlify.app/shop/${resolvedParams.id}`,
+      canonical: `https://urest-kr.netlify.app/shop/${resolvedParams.id}`,
     },
     openGraph: {
       title: `${shop.name} | 유레스트(Urest) 프리미엄 제휴점`,
       description: `${shop.name} 코스 및 가격 정보 안내. 100% 안심 현장 결제로 편안하게 이용해 보세요.`,
-      url: `https://urest.netlify.app/shop/${resolvedParams.id}`,
+      url: `https://urest-kr.netlify.app/shop/${resolvedParams.id}`,
       siteName: "유레스트(Urest)",
       locale: "ko_KR",
       type: "website",
@@ -284,8 +284,8 @@ export default async function ShopDetailPage({ params }: PageProps) {
     "name": `${shop.name} - 유레스트`,
     "description": shop.desc,
     "telephone": shop.phone,
-    "url": `https://urest.netlify.app/shop/${shopId}`,
-    "image": `https://urest.netlify.app${shop.image}`,
+    "url": `https://urest-kr.netlify.app/shop/${shopId}`,
+    "image": `https://urest-kr.netlify.app${shop.image}`,
     "address": {
       "@type": "PostalAddress",
       "addressRegion": "수도권(서울, 경기, 인천)",

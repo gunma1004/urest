@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     "유레스트 가격안내"
   ],
   alternates: {
-    canonical: "https://urest.netlify.app/prices",
+    canonical: "https://urest-kr.netlify.app/prices",
   },
   openGraph: {
     title: "코스별 가격 안내 | 유레스트(Urest) 투명한 현장 결제 정찰제",
     description: "선입금 없는 100% 안심 현장 결제! 릴렉싱, 아로마, 스웨디시 맞춤 코스별 요금을 투명하게 비교해 보세요.",
-    url: "https://urest.netlify.app/prices",
+    url: "https://urest-kr.netlify.app/prices",
     siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",

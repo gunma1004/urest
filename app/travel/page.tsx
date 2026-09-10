@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     "여행 피로회복"
   ],
   alternates: {
-    canonical: "https://urest.netlify.app/travel",
+    canonical: "https://urest-kr.netlify.app/travel",
   },
   openGraph: {
     title: "수도권 힐링 여행지 안내 | 유레스트(Urest) 추천 명소",
     description: "피로를 비워내는 서울·경기·인천 시그니처 힐링 여행 코스! 맑은 자연과 함께하는 웰니스 라이프를 만나보세요.",
-    url: "https://urest.netlify.app/travel",
+    url: "https://urest-kr.netlify.app/travel",
     siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",

@@ -3,7 +3,7 @@ import "./globals.css";
 import NavigationHeader from "./NavigationHeader";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://urest.netlify.app"),
+  metadataBase: new URL("https://urest-kr.netlify.app"),
   title: {
     // 🌟 유레스트 브랜딩 및 타겟 지역 설정 (스팸 키워드 완전 배제)
     default: "유레스트 | 서울·경기·인천 프리미엄 웰니스 테라피 플랫폼",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     "인천 웰니스"
   ],
   alternates: {
-    canonical: "https://urest.netlify.app",
+    canonical: "https://urest-kr.netlify.app",
   },
   verification: {
     other: {
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "유레스트 | 서울·경기·인천 프리미엄 테라피 플랫폼",
     description: "선입금 없는 100% 현장 결제 안심 예약! 수도권 프리미엄 테라피 안심 가이드.",
-    url: "https://urest.netlify.app",
+    url: "https://urest-kr.netlify.app",
     siteName: "유레스트",
     locale: "ko_KR",
     type: "website",

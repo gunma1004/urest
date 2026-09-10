@@ -15,12 +15,12 @@ export const metadata: Metadata = {
     "1대1 맞춤 테라피"
   ],
   alternates: {
-    canonical: "https://urest.netlify.app/services",
+    canonical: "https://urest-kr.netlify.app/services",
   },
   openGraph: {
     title: "서비스 안내 | 유레스트(Urest) 맞춤 힐링 테라피 코스",
     description: "컨디션과 취향에 맞춘 최상의 힐링 프로그램! 릴렉싱, 아로마, 스웨디시 프리미엄 바디케어를 만나보세요.",
-    url: "https://urest.netlify.app/services",
+    url: "https://urest-kr.netlify.app/services",
     siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",

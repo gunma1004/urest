@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   // 🌐 유레스트 Netlify 공식 도메인
-  const baseUrl = 'https://urest.netlify.app';
+  const baseUrl = 'https://urest-kr.netlify.app';
 
   // 1. 메인 홈 페이지 (클린 웰니스 플랫폼)
   const mainRoute: MetadataRoute.Sitemap = [

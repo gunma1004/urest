@@ -155,12 +155,12 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
       "유레스트"
     ],
     alternates: {
-      canonical: `https://urest.netlify.app/${region}/${encodeURIComponent(districtName)}${dongName ? `?dong=${encodeURIComponent(dongName)}` : ""}`,
+      canonical: `https://urest-kr.netlify.app/${region}/${encodeURIComponent(districtName)}${dongName ? `?dong=${encodeURIComponent(dongName)}` : ""}`,
     },
     openGraph: {
       title: finalTitle,
       description: finalDescription,
-      url: `https://urest.netlify.app/${region}/${encodeURIComponent(districtName)}${dongName ? `?dong=${encodeURIComponent(dongName)}` : ""}`,
+      url: `https://urest-kr.netlify.app/${region}/${encodeURIComponent(districtName)}${dongName ? `?dong=${encodeURIComponent(dongName)}` : ""}`,
       siteName: "유레스트(Urest)",
       locale: "ko_KR",
       type: "website",
@@ -237,7 +237,7 @@ export default async function RegionalDetailPage({ params, searchParams }: PageP
     "@type": "LocalBusiness",
     "name": `${fullTitle} 프리미엄 테라피 & 웰니스 안내 - 유레스트`,
     "description": `${fullTitle} 지역 웰니스 바디케어 및 프리미엄 테라피 제휴업체 정보 제공`,
-    "url": `https://urest.netlify.app/${region}/${encodeURIComponent(districtName)}`,
+    "url": `https://urest-kr.netlify.app/${region}/${encodeURIComponent(districtName)}`,
     "telephone": "0507-1280-3361",
     "address": {
       "@type": "PostalAddress",
