@@ -1,15 +1,9 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import NavigationHeader from "./NavigationHeader";
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://urest-kr.netlify.app"),
   title: {
-    // 🌟 유레스트 브랜딩 및 타겟 지역 설정 (스팸 키워드 완전 배제)
     default: "유레스트 | 서울·경기·인천 프리미엄 웰니스 테라피 플랫폼",
     template: "%s | 유레스트"
   },
-  // 네이버/구글 검색 최적 노출 디스크립션 (75~80자 내외)
   description: "서울, 경기, 인천 전 지역 프리미엄 바디케어 & 웰니스 테라피 전문 플랫폼 유레스트(Urest). 선입금 없는 100% 현장 결제, 검증된 제휴 센터 코스 및 실시간 일정 안내.",
   keywords: [
     "유레스트",
@@ -30,8 +24,8 @@ export const metadata: Metadata = {
   },
   verification: {
     other: {
-      // 🌟 네이버 서치어드바이저 사이트 등록 후 발급받은 실제 인증 코드로 교체하세요
-      "naver-site-verification": "YOUR_NAVER_VERIFICATION_CODE",
+      // 🌟 네이버 서치어드바이저 인증 코드 적용 완료
+      "naver-site-verification": "feb5dd2e768f90369090ec09143b9fb05c3f437a",
     },
   },
   openGraph: {
@@ -62,18 +56,3 @@ export const metadata: Metadata = {
     },
   },
 };
-
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  return (
-    <html lang="ko">
-      <body className="bg-[#08080a] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black">
-        <NavigationHeader />
-        {children}
-      </body>
-    </html>
-  );
-}
