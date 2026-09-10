@@ -2,34 +2,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "코스별 가격 안내 | 투명한 100% 후불 정찰제 - 힐핏(HealFit)",
+  title: "코스별 가격 안내 | 투명한 100% 현장 결제 정찰제 - 유레스트(Urest)",
   // 네이버 검색 최적 글자 수 (공백 포함 75~80자) 및 안심 예약 CTR 문구
-  description: "서울·경기·인천 힐핏 투명한 코스별 가격 안내! 타이, 아로마, 스웨디시, VIP 맞춤 케어 비용과 100% 안심 후불제 예약 시스템을 확인하세요.",
+  description: "서울·경기·인천 유레스트 투명한 코스별 가격 안내! 릴렉싱, 아로마, 스웨디시, VIP 맞춤 케어 비용과 100% 안심 현장 결제 시스템을 확인하세요.",
   keywords: [
-    "마사지 가격",
-    "홈케어 가격",
-    "타이마사지 비용",
+    "바디케어 가격",
+    "홈케어 비용",
+    "릴렉싱 테라피 요금",
     "아로마 테라피 요금",
     "스웨디시 가격",
-    "후불제 바디케어",
-    "힐핏 가격안내"
+    "현장 결제 바디케어",
+    "유레스트 가격안내"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app/prices",
+    canonical: "https://urest.netlify.app/prices",
   },
   openGraph: {
-    title: "코스별 가격 안내 | 힐핏(HealFit) 투명한 후불 정찰제",
-    description: "선입금 없는 100% 안심 후불제! 타이, 아로마, 스웨디시 맞춤 코스별 요금을 투명하게 비교해 보세요.",
-    url: "https://healfitmassage.netlify.app/prices",
-    siteName: "힐핏(HealFit)",
+    title: "코스별 가격 안내 | 유레스트(Urest) 투명한 현장 결제 정찰제",
+    description: "선입금 없는 100% 안심 현장 결제! 릴렉싱, 아로마, 스웨디시 맞춤 코스별 요금을 투명하게 비교해 보세요.",
+    url: "https://urest.netlify.app/prices",
+    siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",
     images: [
       {
-        url: "/og-main.png",
+        url: "/og-main.webp",
         width: 1200,
         height: 630,
-        alt: "힐핏 코스별 가격 안내",
+        alt: "유레스트 코스별 가격 안내",
       },
     ],
   },
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
 
 const priceList = [
   {
-    title: "타이 건식 릴렉싱 케어",
+    title: "릴렉싱 건식 바디 케어",
     duration: "60분 / 90분 / 120분",
     price: "60,000원부터~",
     desc: "전신 굳은 근육 이완 및 척추·하체 중심의 맞춤 스트레칭 프로그램",
@@ -81,10 +81,10 @@ export default function PricesPage() {
             TRANSPARENT PRICE POLICY
           </span>
           <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-            힐핏 투명한 코스별 가격 안내
+            유레스트 투명한 코스별 가격 안내
           </h1>
           <p className="text-xs md:text-sm text-gray-400 max-w-md mx-auto leading-relaxed">
-            100% 후불제 안심 예약 시스템으로 운영되며, 방문 전 일체의 선입금이나 예약금을 요구하지 않습니다.
+            100% 현장 결제 안심 예약 시스템으로 운영되며, 방문 전 일체의 선입금이나 예약금을 요구하지 않습니다.
           </p>
         </section>
 
@@ -95,10 +95,10 @@ export default function PricesPage() {
           </div>
           <div className="space-y-0.5">
             <h2 className="text-sm font-bold text-amber-300">
-              선입금 ZERO · 100% 도착 후 결제 보장
+              선입금 ZERO · 100% 도착 후 현장 결제 보장
             </h2>
             <p className="text-xs text-gray-400 leading-relaxed">
-              힐핏의 모든 제휴점은 테라피스트 도착 후 현장 결제로 진행되어 안심하고 이용하실 수 있습니다.
+              유레스트의 모든 제휴점은 테라피스트 도착 후 현장 결제로 진행되어 안심하고 이용하실 수 있습니다.
             </p>
           </div>
         </section>
@@ -142,7 +142,7 @@ export default function PricesPage() {
                     {item.price}
                   </span>
                   <span className="text-[10px] text-gray-500 font-medium">
-                    (VAT 포함 / 100% 후불)
+                    (VAT 포함 / 100% 현장 결제)
                   </span>
                 </div>
               </div>
@@ -165,7 +165,7 @@ export default function PricesPage() {
         {/* 빠른 상담 및 예약 연결 */}
         <section className="text-center pt-2 space-y-4">
           <a 
-            href="tel:0507-1280-3344"
+            href="tel:050712803361"
             className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-sm px-8 py-3.5 rounded-2xl shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all transform active:scale-95"
           >
             📞 실시간 코스 및 비용 상담하기
@@ -176,7 +176,7 @@ export default function PricesPage() {
               href="/"
               className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
             >
-              ← 힐핏 메인 홈으로 이동하기
+              ← 유레스트 메인 홈으로 이동하기
             </Link>
           </div>
         </section>

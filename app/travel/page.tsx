@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "수도권 힐링 여행지 안내 | 서울·경기·인천 추천 명소 - 힐핏(HealFit)",
+  title: "수도권 힐링 여행지 안내 | 서울·경기·인천 추천 명소 - 유레스트(Urest)",
   // 네이버 검색 최적 글자 수 (공백 포함 75~80자) 및 힐링 가이드 CTR 문구
-  description: "서울·경기·인천 힐핏 추천 수도권 힐링 여행지! 도심 숲길, 호수 드라이브, 오션뷰 일몰 명소와 여행 후 피로를 푸는 맞춤 테라피 팁을 확인하세요.",
+  description: "서울·경기·인천 유레스트 추천 수도권 힐링 여행지! 도심 숲길, 호수 드라이브, 오션뷰 일몰 명소와 여행 후 피로를 푸는 맞춤 테라피 팁을 확인하세요.",
   keywords: [
-    "힐핏 여행가이드",
+    "유레스트 여행가이드",
     "수도권 힐링여행",
     "서울 야경명소",
     "경기 드라이브코스",
@@ -15,21 +15,21 @@ export const metadata: Metadata = {
     "여행 피로회복"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app/travel",
+    canonical: "https://urest.netlify.app/travel",
   },
   openGraph: {
-    title: "수도권 힐링 여행지 안내 | 힐핏(HealFit) 추천 명소",
+    title: "수도권 힐링 여행지 안내 | 유레스트(Urest) 추천 명소",
     description: "피로를 비워내는 서울·경기·인천 시그니처 힐링 여행 코스! 맑은 자연과 함께하는 웰니스 라이프를 만나보세요.",
-    url: "https://healfitmassage.netlify.app/travel",
-    siteName: "힐핏(HealFit)",
+    url: "https://urest.netlify.app/travel",
+    siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",
     images: [
       {
-        url: "/og-main.png",
+        url: "/og-main.webp",
         width: 1200,
         height: 630,
-        alt: "힐핏 수도권 힐링 여행지 안내",
+        alt: "유레스트 수도권 힐링 여행지 안내",
       },
     ],
   },
@@ -125,9 +125,9 @@ export default function TravelPage() {
                 ))}
               </div>
 
-              {/* 힐핏 웰니스 팁 */}
+              {/* 유레스트 웰니스 팁 */}
               <div className="bg-black/50 p-3.5 rounded-2xl border border-white/5 text-[11px] text-gray-400 leading-relaxed">
-                <strong className="text-amber-400 font-bold">🌿 힐핏 릴렉스 팁:</strong> {spot.tip}
+                <strong className="text-amber-400 font-bold">🌿 유레스트 릴렉스 팁:</strong> {spot.tip}
               </div>
             </div>
           ))}
@@ -140,15 +140,15 @@ export default function TravelPage() {
               🚗 즐거운 드라이브 후 지친 몸, 편안한 공간에서 풀어보세요
             </h3>
             <p className="text-xs text-gray-300 max-w-md mx-auto leading-relaxed">
-              수도권 전지역 25분 내 빠른 방문! 100% 안심 후불제로 나만의 아늑한 공간에서 1:1 맞춤 피로회복을 누리실 수 있습니다.
+              수도권 전지역 25분 내 빠른 방문! 100% 안심 현장 결제로 나만의 아늑한 공간에서 1:1 맞춤 피로회복을 누리실 수 있습니다.
             </p>
           </div>
           <div>
             <a 
-              href="tel:0507-1280-3344"
+              href="tel:050712803361"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-xs px-6 py-3 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all transform active:scale-95"
             >
-              📞 힐핏 실시간 바디케어 예약하기
+              📞 유레스트 실시간 바디케어 예약하기
             </a>
           </div>
         </section>
@@ -159,7 +159,7 @@ export default function TravelPage() {
             href="/"
             className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
           >
-            ← 힐핏 메인 홈으로 이동하기
+            ← 유레스트 메인 홈으로 이동하기
           </Link>
         </div>
 

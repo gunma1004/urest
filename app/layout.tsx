@@ -3,49 +3,50 @@ import "./globals.css";
 import NavigationHeader from "./NavigationHeader";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://healfitmassage.netlify.app"),
+  metadataBase: new URL("https://urest.netlify.app"),
   title: {
-    // 🌟 네이버 40자 이내 권장 규격 준수 (32자)
-    default: "힐핏(HealFit) | 서울·경기·인천 24시 출장마사지",
-    template: "%s | 힐핏(HealFit)"
+    // 🌟 유레스트 브랜딩 및 타겟 지역 설정 (스팸 키워드 완전 배제)
+    default: "유레스트 | 서울·경기·인천 프리미엄 웰니스 테라피 플랫폼",
+    template: "%s | 유레스트"
   },
-  // 네이버 검색 최적 노출 디스크립션 (75~80자 내외)
-  description: "서울·경기·인천 24시 출장마사지 & 방문 홈케어 전문 힐핏! 선입금 없는 100% 안심 후불제, 타이·아로마·스웨디시 제휴업체 정보 및 실시간 빠른 예약을 확인하세요.",
+  // 네이버/구글 검색 최적 노출 디스크립션 (75~80자 내외)
+  description: "서울, 경기, 인천 전 지역 프리미엄 바디케어 & 웰니스 테라피 전문 플랫폼 유레스트(Urest). 선입금 없는 100% 현장 결제, 검증된 제휴 센터 코스 및 실시간 일정 안내.",
   keywords: [
-    "출장마사지",
-    "출장 마사지",
-    "서울 출장마사지",
-    "경기 출장마사지",
-    "인천 출장마사지",
-    "홈타이",
-    "방문 마사지",
-    "스웨디시",
+    "유레스트",
+    "Urest",
+    "서울 테라피",
+    "경기 테라피",
+    "인천 테라피",
+    "웰니스 바디케어",
     "아로마 테라피",
-    "후불제 출장마사지",
-    "힐핏",
-    "HealFit"
+    "타이 릴렉싱",
+    "프리미엄 테라피",
+    "서울 웰니스",
+    "경기 웰니스",
+    "인천 웰니스"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app",
+    canonical: "https://urest.netlify.app",
   },
   verification: {
     other: {
-      "naver-site-verification": "199170efdbe214642e81615d6d9e58dce4545143",
+      // 🌟 네이버 서치어드바이저 사이트 등록 후 발급받은 실제 인증 코드로 교체하세요
+      "naver-site-verification": "YOUR_NAVER_VERIFICATION_CODE",
     },
   },
   openGraph: {
-    title: "힐핏(HealFit) | 서울·경기·인천 24시 안심 출장마사지",
-    description: "선입금 없는 100% 후불제 안심 예약! 수도권 전지역 평균 25분 내 빠른 방문 바디케어.",
-    url: "https://healfitmassage.netlify.app",
-    siteName: "힐핏(HealFit)",
+    title: "유레스트 | 서울·경기·인천 프리미엄 테라피 플랫폼",
+    description: "선입금 없는 100% 현장 결제 안심 예약! 수도권 프리미엄 테라피 안심 가이드.",
+    url: "https://urest.netlify.app",
+    siteName: "유레스트",
     locale: "ko_KR",
     type: "website",
     images: [
       {
-        url: "/og-main.png",
+        url: "/og-main.webp",
         width: 1200,
         height: 630,
-        alt: "힐핏 프리미엄 테라피 안내",
+        alt: "유레스트 공식 안내",
       },
     ],
   },

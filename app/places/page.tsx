@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "주변 제휴명소 & 맛집·숙소 안내 | 힐핏(HealFit)",
-  description: "서울·경기·인천 힐링 명소와 검증된 맛집, 편안한 휴식 공간 가이드! 힐핏 테라피 케어와 함께 즐기는 수도권 추천 스팟 정보를 확인하세요.",
+  title: "주변 제휴명소 & 맛집·숙소 안내 | 유레스트(Urest)",
+  description: "서울·경기·인천 힐링 명소와 검증된 맛집, 편안한 휴식 공간 가이드! 유레스트 테라피 케어와 함께 즐기는 수도권 추천 스팟 정보를 확인하세요.",
   keywords: [
-    "힐핏 제휴명소",
+    "유레스트 제휴명소",
     "서울 맛집 숙소",
     "경기 힐링 스팟",
     "인천 휴식 공간",
@@ -13,21 +13,21 @@ export const metadata: Metadata = {
     "웰니스 푸드"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app/places",
+    canonical: "https://urest.netlify.app/places",
   },
   openGraph: {
-    title: "주변 제휴명소 & 맛집·숙소 안내 | 힐핏(HealFit)",
+    title: "주변 제휴명소 & 맛집·숙소 안내 | 유레스트(Urest)",
     description: "테라피와 함께 즐기는 서울·경기·인천 핫플레이스! 검증된 맛집과 편안한 휴식처를 한눈에 만나보세요.",
-    url: "https://healfitmassage.netlify.app/places",
-    siteName: "힐핏(HealFit)",
+    url: "https://urest.netlify.app/places",
+    siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",
     images: [
       {
-        url: "/og-main.png",
+        url: "/og-main.webp",
         width: 1200,
         height: 630,
-        alt: "힐핏 주변 제휴명소 안내",
+        alt: "유레스트 주변 제휴명소 안내",
       },
     ],
   },
@@ -42,7 +42,7 @@ const placeCategories = [
         name: "도심 속 오가닉 티 라운지",
         region: "서울 강남 / 서초",
         desc: "테라피 전후 심신 안정을 돕는 프리미엄 유기농 허브티 & 블렌딩 티 전문점",
-        badge: "힐핏 제휴 추천",
+        badge: "유레스트 제휴 추천",
       },
       {
         name: "포레스트 뷰 릴렉스 카페",
@@ -104,17 +104,17 @@ export default function PlacesPage() {
             내 주변 맛집 & 편안한 휴식 명소
           </h1>
           <p className="text-xs md:text-sm text-gray-400 max-w-lg mx-auto leading-relaxed">
-            서울·경기·인천 지역의 테라피 바디케어와 함께 즐기기 좋은 검증된 맛집, 웰니스 카페, 숙소 가이드입니다.
+            서울·경기·인천 지역의 웰니스 바디케어와 함께 즐기기 좋은 검증된 맛집, 웰니스 카페, 숙소 가이드입니다.
           </p>
         </section>
 
         {/* 메인 안내 배너 */}
         <section className="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-amber-500/10 border border-amber-500/30 p-5 md:p-6 rounded-3xl text-center space-y-2 shadow-[0_0_25px_rgba(245,158,11,0.08)]">
           <p className="text-xs md:text-sm font-bold text-amber-300">
-            ✨ 힐핏 파트너와 함께하는 품격 있는 휴식 플랜
+            ✨ 유레스트 파트너와 함께하는 품격 있는 휴식 플랜
           </p>
           <p className="text-[11px] md:text-xs text-gray-400">
-            힐핏은 이용자분들의 건강한 힐링 라이프스타일을 위해 수도권 거점별 명소를 엄선하여 주기적으로 업데이트하고 있습니다.
+            유레스트는 이용자분들의 건강한 웰니스 라이프스타일을 위해 수도권 거점별 명소를 엄선하여 주기적으로 업데이트하고 있습니다.
           </p>
         </section>
 
@@ -163,17 +163,17 @@ export default function PlacesPage() {
         {/* 하단 제휴 문의 안내 */}
         <section className="bg-[#0f0f13] border border-amber-500/30 p-6 rounded-3xl text-center space-y-3">
           <h3 className="text-base font-black text-white">
-            🤝 힐핏 제휴 명소 등록 및 입점 안내
+            🤝 유레스트 제휴 명소 등록 및 입점 안내
           </h3>
           <p className="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
             서울·경기·인천 지역의 웰니스 매장, 맛집, 숙박 업주분들의 제휴 신청을 받고 있습니다.
           </p>
           <div>
             <a 
-              href="tel:0507-1280-3344"
+              href="tel:050712803361"
               className="inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-xs px-5 py-2.5 rounded-xl shadow transition-all transform active:scale-95"
             >
-              📞 명소 제휴 문의하기 (0507-1280-3344)
+              📞 명소 제휴 문의하기 (0507-1280-3361)
             </a>
           </div>
         </section>
@@ -184,7 +184,7 @@ export default function PlacesPage() {
             href="/"
             className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
           >
-            ← 힐핏 메인 홈으로 이동하기
+            ← 유레스트 메인 홈으로 이동하기
           </Link>
         </div>
 

@@ -2,34 +2,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "실제 고객 생생후기 | 만족도 5.0 안심 이용 리뷰 - 힐핏(HealFit)",
+  title: "실제 고객 생생후기 | 만족도 5.0 안심 이용 리뷰 - 유레스트(Urest)",
   // 네이버 검색 최적 글자 수 (공백 포함 75~80자) 및 안심 신뢰 CTR 문구
-  description: "서울·경기·인천 힐핏 실제 이용 고객 100% 솔직 후기 모음! 신속 방문 만족도, 관리사 실력, 선입금 없는 후불제 안심 리뷰를 확인해 보세요.",
+  description: "서울·경기·인천 유레스트 실제 이용 고객 100% 솔직 후기 모음! 신속 방문 만족도, 관리사 실력, 선입금 없는 현장 결제 안심 리뷰를 확인해 보세요.",
   keywords: [
-    "힐핏 후기",
-    "마사지 이용후기",
+    "유레스트 후기",
+    "바디케어 이용후기",
     "홈케어 솔직리뷰",
-    "출장마사지 후기",
+    "방문테라피 후기",
     "스웨디시 후기",
     "서울 방문케어 후기",
-    "경기 마사지 리뷰"
+    "경기 테라피 리뷰"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app/reviews",
+    canonical: "https://urest.netlify.app/reviews",
   },
   openGraph: {
-    title: "실제 고객 생생후기 | 힐핏(HealFit) 검증된 100% 솔직 리뷰",
-    description: "선입금 없는 안심 후불제와 빠른 방문! 서울·경기·인천 고객님들이 직접 작성한 생생한 피로회복 후기를 만나보세요.",
-    url: "https://healfitmassage.netlify.app/reviews",
-    siteName: "힐핏(HealFit)",
+    title: "실제 고객 생생후기 | 유레스트(Urest) 검증된 100% 솔직 리뷰",
+    description: "선입금 없는 안심 현장 결제와 빠른 방문! 서울·경기·인천 고객님들이 직접 작성한 생생한 피로회복 후기를 만나보세요.",
+    url: "https://urest.netlify.app/reviews",
+    siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",
     images: [
       {
-        url: "/og-main.png",
+        url: "/og-main.webp",
         width: 1200,
         height: 630,
-        alt: "힐핏 실제 고객 생생후기",
+        alt: "유레스트 실제 고객 생생후기",
       },
     ],
   },
@@ -56,7 +56,7 @@ const reviews = [
     rate: "★★★★★ 5.0",
     course: "베테랑 VIP 스페셜 120분",
     badge: "인증 리뷰",
-    text: "선입금 없는 100% 후불제라 정말 마음 편하게 이용했습니다. 테라피스트 분 마인드와 실력이 너무 훌륭하시고 위생도 청결해서 아주 만족스러웠습니다.",
+    text: "선입금 없는 100% 현장 결제라 정말 마음 편하게 이용했습니다. 테라피스트 분 마인드와 실력이 너무 훌륭하시고 위생도 청결해서 아주 만족스러웠습니다.",
   },
   {
     name: "인천 연수구 송도 고객님",
@@ -70,7 +70,7 @@ const reviews = [
     name: "서울 마포구 상암동 고객님",
     date: "최근 이용",
     rate: "★★★★★ 5.0",
-    course: "타이 건식 릴렉싱 60분",
+    course: "릴렉싱 건식 케어 60분",
     badge: "신규 고객",
     text: "운동 후 근육 뭉침이 심해서 급하게 예약했는데 도착 시간도 칼같으셨고 스트레칭 압 조절을 너무 잘해주셔서 뭉친 다리가 완전히 가벼워졌습니다.",
   },
@@ -80,7 +80,7 @@ const reviews = [
     rate: "★★★★★ 5.0",
     course: "감성 스웨디시 60분",
     badge: "재이용 고객",
-    text: "타 플랫폼은 선입금 유도가 많아서 불안했는데, 힐핏은 확실한 후불 정찰제라 믿음이 갑니다. 친절하고 프라이빗한 케어 감사합니다.",
+    text: "타 플랫폼은 선입금 유도가 많아서 불안했는데, 유레스트는 확실한 현장 결제 정찰제라 믿음이 갑니다. 친절하고 프라이빗한 케어 감사합니다.",
   },
 ];
 
@@ -95,10 +95,10 @@ export default function ReviewsPage() {
             REAL CUSTOMER REVIEWS
           </span>
           <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-            힐핏 실제 이용 고객 솔직 후기
+            유레스트 실제 이용 고객 솔직 후기
           </h1>
           <p className="text-xs md:text-sm text-gray-400 max-w-md mx-auto leading-relaxed">
-            서울·경기·인천 전지역에서 힐핏 서비스를 직접 경험하신 고객님들의 100% 솔직한 생생 후기입니다.
+            서울·경기·인천 전지역에서 유레스트 서비스를 직접 경험하신 고객님들의 100% 솔직한 생생 후기입니다.
           </p>
         </section>
 
@@ -160,14 +160,14 @@ export default function ReviewsPage() {
         {/* 안심 예약 보증 배너 */}
         <section className="bg-[#0f0f13] border border-amber-500/30 p-6 rounded-3xl text-center space-y-3">
           <h3 className="text-base font-black text-white">
-            🛡️ 100% 안심 후불 예약제 운영
+            🛡️ 100% 안심 현장 결제 예약제 운영
           </h3>
           <p className="text-xs text-gray-400 max-w-md mx-auto leading-relaxed">
-            힐핏은 검증된 관리사 방문 후 결제되는 안전 시스템을 고수하고 있어 예약금 사기 걱정이 없습니다.
+            유레스트는 검증된 관리사 방문 후 결제되는 안전 시스템을 고수하고 있어 예약금 사기 걱정이 없습니다.
           </p>
           <div>
             <a 
-              href="tel:0507-1280-3344"
+              href="tel:050712803361"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-xs px-6 py-3 rounded-xl shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all transform active:scale-95"
             >
               📞 지금 바로 실시간 힐링 예약하기
@@ -181,7 +181,7 @@ export default function ReviewsPage() {
             href="/"
             className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
           >
-            ← 힐핏 메인 홈으로 이동하기
+            ← 유레스트 메인 홈으로 이동하기
           </Link>
         </div>
 

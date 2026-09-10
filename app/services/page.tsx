@@ -2,34 +2,34 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "서비스 안내 | 맞춤 테라피 & 프리미엄 바디케어 - 힐핏(HealFit)",
+  title: "서비스 안내 | 맞춤 테라피 & 프리미엄 웰니스 바디케어 - 유레스트(Urest)",
   // 네이버 검색 최적 글자 수 (공백 포함 75~80자) 및 안심 케어 CTR 문구
-  description: "서울·경기·인천 힐핏 서비스 안내! 타이 건식, 천연 아로마, 감성 스웨디시, VIP 맞춤 테라피 코스와 100% 안심 후불제 프로그램을 확인하세요.",
+  description: "서울·경기·인천 유레스트 서비스 안내! 릴렉싱 건식, 천연 아로마, 감성 스웨디시, VIP 맞춤 테라피 코스와 100% 안심 현장 결제 프로그램을 확인하세요.",
   keywords: [
-    "힐핏 서비스",
-    "타이마사지 코스",
+    "유레스트 서비스",
+    "바디케어 코스",
     "아로마테라피 프로그램",
     "스웨디시 마사지",
     "방문 홈케어 서비스",
-    "바디케어 추천",
+    "웰니스 케어 추천",
     "1대1 맞춤 테라피"
   ],
   alternates: {
-    canonical: "https://healfitmassage.netlify.app/services",
+    canonical: "https://urest.netlify.app/services",
   },
   openGraph: {
-    title: "서비스 안내 | 힐핏(HealFit) 맞춤 힐링 테라피 코스",
-    description: "컨디션과 취향에 맞춘 최상의 힐링 프로그램! 타이, 아로마, 스웨디시 프리미엄 바디케어를 만나보세요.",
-    url: "https://healfitmassage.netlify.app/services",
-    siteName: "힐핏(HealFit)",
+    title: "서비스 안내 | 유레스트(Urest) 맞춤 힐링 테라피 코스",
+    description: "컨디션과 취향에 맞춘 최상의 힐링 프로그램! 릴렉싱, 아로마, 스웨디시 프리미엄 바디케어를 만나보세요.",
+    url: "https://urest.netlify.app/services",
+    siteName: "유레스트(Urest)",
     locale: "ko_KR",
     type: "website",
     images: [
       {
-        url: "/og-main.png",
+        url: "/og-main.webp",
         width: 1200,
         height: 630,
-        alt: "힐핏 서비스 안내",
+        alt: "유레스트 서비스 안내",
       },
     ],
   },
@@ -38,8 +38,8 @@ export const metadata: Metadata = {
 const serviceList = [
   {
     num: "01",
-    title: "정통 타이 건식 테라피",
-    sub: "TRADITIONAL THAI CARE",
+    title: "정통 릴렉싱 건식 케어",
+    sub: "TRADITIONAL RELAX CARE",
     desc: "전신의 뭉친 근육과 스트레스받은 관절을 체계적인 스트레칭과 지압으로 정성스럽게 풀어주는 전통 릴렉싱 코스입니다.",
     tags: ["전신 피로 회복", "관절 스트레칭", "근육 이완"],
     recommend: "오랜 좌식 생활로 어깨와 허리가 결리는 직장인",
@@ -81,7 +81,7 @@ export default function ServicesPage() {
             PREMIUM CARE SERVICE
           </span>
           <h1 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-            힐핏 코스별 서비스 프로그램 안내
+            유레스트 코스별 서비스 프로그램 안내
           </h1>
           <p className="text-xs md:text-sm text-gray-400 max-w-lg mx-auto leading-relaxed">
             고객님의 당일 컨디션과 선호에 맞춰 가장 편안하고 완벽한 피로회복 시간을 선사하는 맞춤 테라피 프로그램입니다.
@@ -97,7 +97,7 @@ export default function ServicesPage() {
           </div>
           <div className="space-y-1 border-l border-white/5">
             <span className="text-xl">🛡️</span>
-            <h4 className="text-xs font-bold text-white">100% 안심 후불제</h4>
+            <h4 className="text-xs font-bold text-white">100% 안심 현장 결제</h4>
             <p className="text-[10px] text-gray-400">도착 전 선입금 0원</p>
           </div>
           <div className="space-y-1 border-l border-white/5">
@@ -167,7 +167,7 @@ export default function ServicesPage() {
           </p>
           <div className="pt-1">
             <a 
-              href="tel:0507-1280-3344"
+              href="tel:050712803361"
               className="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-xs px-6 py-3 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all transform active:scale-95"
             >
               📞 1:1 맞춤 코스 실시간 상담하기
@@ -181,7 +181,7 @@ export default function ServicesPage() {
             href="/"
             className="inline-flex items-center gap-1 text-xs text-gray-400 hover:text-amber-400 transition-colors"
           >
-            ← 힐핏 메인 홈으로 이동하기
+            ← 유레스트 메인 홈으로 이동하기
           </Link>
         </div>
 
