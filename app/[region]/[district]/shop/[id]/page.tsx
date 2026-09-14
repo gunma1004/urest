@@ -6,7 +6,6 @@ interface PageProps {
   params: Promise<{
     region?: string;
     district?: string;
-    dong?: string;
     id?: string;
     shopId?: string;
   }>;
@@ -36,11 +35,11 @@ function safeDecode(str?: string): string {
   return decoded.trim();
 }
 
-function parseLocationText(region?: string, district?: string, dong?: string): string {
+// 🌟 구 이름만 정확히 조합하는 함수
+function parseDistrictLocation(region?: string, district?: string): string {
   const regionName = getRegionFullName(region);
   const decodedDistrict = safeDecode(district);
-  const decodedDong = safeDecode(dong);
-  return `${regionName} ${decodedDistrict} ${decodedDong}`.replace(/\s+/g, " ").trim();
+  return `${regionName} ${decodedDistrict}`.replace(/\s+/g, " ").trim();
 }
 
 const shopData: Record<string, {
@@ -217,9 +216,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const targetId = resolvedParams.id || resolvedParams.shopId || "1";
   const shop = shopData[targetId] || shopData["1"];
 
-  const locationPrefix = parseLocationText(resolvedParams.region, resolvedParams.district, resolvedParams.dong);
+  const locationPrefix = parseDistrictLocation(resolvedParams.region, resolvedParams.district);
 
-  // 🌟 요청하신 출장/방문 형태의 30가지 순환형 타이틀 패턴 분기
   const titleVariants = [
     `${locationPrefix} 출장 방문 릴렉스 마사지 · ${shop.name}`,
     `${locationPrefix} 출장 프라이빗 맞춤 마사지 - ${shop.name}`,
@@ -258,9 +256,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageTitle = titleVariants[variantIndex];
   const pageDescription = `${locationPrefix} 24시 신속 방문 출장 타이 & 아로마 마사지 전문 ${shop.name}. 선입금 없는 100% 현장 결제로 안심하고 이용하세요.`;
 
-  const canonicalUrl = resolvedParams.dong
-    ? `https://urest-kr.netlify.app/${resolvedParams.region}/${encodeURIComponent(safeDecode(resolvedParams.district))}/${encodeURIComponent(safeDecode(resolvedParams.dong))}/shop/${targetId}`
-    : `https://urest-kr.netlify.app/${resolvedParams.region}/${encodeURIComponent(safeDecode(resolvedParams.district))}/shop/${targetId}`;
+  const canonicalUrl = `https://urest-kr.netlify.app/${resolvedParams.region}/${encodeURIComponent(safeDecode(resolvedParams.district))}/shop/${targetId}`;
 
   return {
     title: { absolute: pageTitle },
@@ -278,7 +274,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   };
 }
 
-export default async function ShopDetailPage({ params }: PageProps) {
+export default async function DistrictShopDetailPage({ params }: PageProps) {
   const resolvedParams = await params;
   const targetId = resolvedParams.id || resolvedParams.shopId || "1";
   const shop = shopData[targetId];
@@ -289,12 +285,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
 
   const region = resolvedParams.region || "seoul";
   const districtName = safeDecode(resolvedParams.district);
-  const dongName = safeDecode(resolvedParams.dong);
-  const locationPrefix = parseLocationText(region, resolvedParams.district, dongName);
-
-  const backLink = dongName 
-    ? `/${region}/${encodeURIComponent(districtName)}/${encodeURIComponent(dongName)}`
-    : `/${region}/${encodeURIComponent(districtName)}`;
+  const locationPrefix = parseDistrictLocation(region, resolvedParams.district);
 
   return (
     <div className="bg-[#08080a] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black pb-28">
@@ -314,10 +305,10 @@ export default async function ShopDetailPage({ params }: PageProps) {
           </Link>
           
           <Link 
-            href={backLink} 
+            href={`/${region}/${encodeURIComponent(districtName)}`} 
             className="text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/30 hover:bg-amber-500 hover:text-black transition-all"
           >
-            ← {dongName || districtName} 목록
+            ← {districtName} 목록
           </Link>
         </div>
       </header>
