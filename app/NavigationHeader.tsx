@@ -21,7 +21,7 @@ export default function NavigationHeader() {
               유레스트
             </span>
             <span className="text-[10px] text-amber-300/70 font-semibold tracking-widest uppercase mt-0.5">
-              Urest
+              Urest Wellness
             </span>
           </div>
         </Link>
@@ -30,16 +30,16 @@ export default function NavigationHeader() {
         <nav className="hidden md:flex items-center gap-6 text-xs font-bold text-gray-300">
           
           {/* 1. 제휴 센터 5대 매장 */}
-          <a href="/#partners" className="hover:text-amber-400 transition-colors">
+          <Link href="/#partners" className="hover:text-amber-400 transition-colors">
             공식 제휴센터
-          </a>
+          </Link>
 
           {/* 2. 프로그램 & 코스 요금 */}
-          <a href="/#price" className="hover:text-amber-400 transition-colors">
+          <Link href="/#price" className="hover:text-amber-400 transition-colors">
             코스&amp;표준요금
-          </a>
+          </Link>
 
-          {/* 3. 지역별 안내 드롭다운 */}
+          {/* 3. 지역별 안내 드롭다운 (404 방지를 위해 대표 구 또는 지역검색기로 연결) */}
           <div 
             className="relative cursor-pointer py-2"
             onMouseEnter={() => setIsRegionOpen(true)}
@@ -52,28 +52,35 @@ export default function NavigationHeader() {
 
             {isRegionOpen && (
               <div className="absolute top-full left-0 w-36 bg-[#121216] border border-amber-500/30 rounded-2xl shadow-2xl py-2 space-y-1 text-xs z-50 animate-in fade-in slide-in-from-top-1">
-                <Link href="/seoul/" className="block px-4 py-2 hover:bg-amber-500/10 hover:text-amber-400 transition-colors">
-                  📍 서울 지역
+                <Link href="/seoul/강남구" className="block px-4 py-2 hover:bg-amber-500/10 hover:text-amber-400 transition-colors">
+                  📍 서울 강남권
                 </Link>
-                <Link href="/gyeonggi/" className="block px-4 py-2 hover:bg-amber-500/10 hover:text-amber-400 transition-colors">
-                  📍 경기 지역
+                <Link href="/gyeonggi/수원시 장안구" className="block px-4 py-2 hover:bg-amber-500/10 hover:text-amber-400 transition-colors">
+                  📍 경기 수원권
                 </Link>
-                <Link href="/incheon/" className="block px-4 py-2 hover:bg-amber-500/10 hover:text-amber-400 transition-colors">
-                  📍 인천 지역
+                <Link href="/incheon/부평구" className="block px-4 py-2 hover:bg-amber-500/10 hover:text-amber-400 transition-colors">
+                  📍 인천 부평권
+                </Link>
+                <div className="border-t border-white/5 my-1"></div>
+                <Link href="/#search" className="block px-4 py-1.5 text-[11px] text-amber-400/80 hover:text-amber-300 transition-colors">
+                  🔍 전체 지역 찾기
                 </Link>
               </div>
             )}
           </div>
 
           {/* 4. 서비스 진행 절차 */}
-          <a href="/#services" className="hover:text-amber-400 transition-colors">
+          <Link href="/#services" className="hover:text-amber-400 transition-colors">
             이용절차
-          </a>
+          </Link>
 
           {/* 5. 실사용 후기 */}
-          <a href="/#reviews" className="text-amber-400 font-extrabold hover:text-yellow-300 transition-colors flex items-center gap-1 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/30">
+          <Link 
+            href="/#reviews" 
+            className="text-amber-400 font-extrabold hover:text-yellow-300 transition-colors flex items-center gap-1 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/30"
+          >
             <span>⭐</span> 생생후기
-          </a>
+          </Link>
 
         </nav>
 
@@ -83,7 +90,7 @@ export default function NavigationHeader() {
             href="tel:050712803361"
             className="bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-black font-black text-xs px-3.5 py-2 rounded-xl shadow-[0_0_15px_rgba(245,158,11,0.3)] transition-all active:scale-95 flex items-center gap-1.5"
           >
-            <span>📞</span> 24시 제휴·상담
+            <span>📞</span> 웰니스 제휴·상담
           </a>
 
           {/* 모바일 토글 버튼 */}
@@ -106,39 +113,39 @@ export default function NavigationHeader() {
       {/* 모바일 펼침 메뉴 */}
       {isMobileMenuOpen && (
         <div className="md:hidden mt-3 pt-3 border-t border-white/10 space-y-2 text-xs font-bold text-gray-300 px-2 pb-2">
-          <a 
+          <Link 
             href="/#partners" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block py-2 px-3 rounded-lg hover:bg-neutral-800 hover:text-amber-400"
           >
             공식 제휴센터 (5대 매장)
-          </a>
-          <a 
+          </Link>
+          <Link 
             href="/#price" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block py-2 px-3 rounded-lg hover:bg-neutral-800 hover:text-amber-400"
           >
             코스&amp;표준요금
-          </a>
+          </Link>
           <div className="py-2 px-3 rounded-lg bg-neutral-900/50 space-y-1">
             <span className="text-gray-400 text-[11px]">지역별 바로가기</span>
             <div className="flex gap-2 pt-1">
               <Link 
-                href="/seoul/" 
+                href="/seoul/강남구" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex-1 text-center py-1.5 bg-black/60 rounded-md border border-white/5 hover:text-amber-400 text-[11px]"
               >
                 서울
               </Link>
               <Link 
-                href="/gyeonggi/" 
+                href="/gyeonggi/수원시 장안구" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex-1 text-center py-1.5 bg-black/60 rounded-md border border-white/5 hover:text-amber-400 text-[11px]"
               >
                 경기
               </Link>
               <Link 
-                href="/incheon/" 
+                href="/incheon/부평구" 
                 onClick={() => setIsMobileMenuOpen(false)}
                 className="flex-1 text-center py-1.5 bg-black/60 rounded-md border border-white/5 hover:text-amber-400 text-[11px]"
               >
@@ -146,13 +153,13 @@ export default function NavigationHeader() {
               </Link>
             </div>
           </div>
-          <a 
+          <Link 
             href="/#reviews" 
             onClick={() => setIsMobileMenuOpen(false)}
             className="block py-2 px-3 rounded-lg text-amber-400 bg-amber-500/10 border border-amber-500/30"
           >
             ⭐ 생생후기 보러가기
-          </a>
+          </Link>
         </div>
       )}
     </header>

@@ -22,6 +22,17 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://urest-kr.netlify.app",
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   openGraph: {
     title: "유레스트(Urest) | 서울·경기·인천 프리미엄 테라피 플랫폼",
     description: "내 주변 검증된 프리미엄 테라피 센터 정보 총집합! 온전한 휴식을 위한 맞춤 웰니스 케어를 유레스트에서 만나보세요.",
@@ -47,5 +58,27 @@ export const metadata: Metadata = {
 };
 
 export default function Page() {
-  return <MainClientUI />;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "유레스트(Urest)",
+    "url": "https://urest-kr.netlify.app",
+    "description": "서울·경기·인천 프리미엄 웰니스 테라피 및 바디케어 플랫폼",
+    "inLanguage": "ko-KR",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://urest-kr.netlify.app/seoul/{search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <MainClientUI />
+    </>
+  );
 }

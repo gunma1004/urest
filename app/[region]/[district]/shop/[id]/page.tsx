@@ -1,10 +1,46 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 interface PageProps {
   params: Promise<{
-    id: string;
+    region?: string;
+    district?: string;
+    id?: string;
+    shopId?: string;
   }>;
+}
+
+// 🌐 영문 시/도 코드를 한글명으로 변환
+function getRegionFullName(region?: string): string {
+  switch (region?.toLowerCase()) {
+    case "seoul": return "서울";
+    case "gyeonggi": return "경기";
+    case "incheon": return "인천";
+    default: return region || "";
+  }
+}
+
+// 🛠️ 이중 디코딩 방어 함수 (특수문자 및 한글 깨짐 원천 차단)
+function safeDecode(str?: string): string {
+  if (!str) return "";
+  let decoded = str;
+  try {
+    decoded = decodeURIComponent(decodeURIComponent(str));
+  } catch {
+    try {
+      decoded = decodeURIComponent(str);
+    } catch {
+      decoded = str;
+    }
+  }
+  return decoded.trim();
+}
+
+function parseLocationText(region?: string, district?: string): string {
+  const regionName = getRegionFullName(region);
+  const decodedDistrict = safeDecode(district);
+  return `${regionName} ${decodedDistrict}`.replace(/\s+/g, " ").trim();
 }
 
 const shopData: Record<string, {
@@ -253,18 +289,34 @@ const shopData: Record<string, {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
-  const shop = shopData[resolvedParams.id] || shopData["1"];
+  const targetId = resolvedParams.id || resolvedParams.shopId || "1";
+  const shop = shopData[targetId] || shopData["1"];
+
+  const locationPrefix = parseLocationText(resolvedParams.region, resolvedParams.district);
+  const pageTitle = locationPrefix 
+    ? `${locationPrefix} 출장 타이 마사지 24시 안내 - ${shop.name} | 유레스트`
+    : `${shop.name} 코스 및 가격 안내 | 유레스트(Urest) 24시 제휴`;
+
+  const pageDescription = locationPrefix
+    ? `${locationPrefix} 24시 신속 방문 출장 타이 & 아로마 마사지 전문 ${shop.name}. 선입금 없는 100% 현장 결제로 안심하고 이용하세요.`
+    : `${shop.name} 24시 안심 방문 테라피! 선입금 없는 100% 현장 결제, 코스별 가격비교 및 신속 예약 정보를 유레스트에서 확인하세요.`;
+
+  const canonicalUrl = resolvedParams.region && resolvedParams.district
+    ? `https://urest-kr.netlify.app/${resolvedParams.region}/${encodeURIComponent(safeDecode(resolvedParams.district))}/shop/${targetId}`
+    : `https://urest-kr.netlify.app/shop/${targetId}`;
 
   return {
-    title: `${shop.name} 코스 및 가격 안내 | 유레스트(Urest) 24시 제휴`,
-    description: `${shop.name} 24시 안심 방문 테라피! 선입금 없는 100% 현장 결제, 코스별 가격비교 및 신속 예약 정보를 유레스트에서 확인하세요.`,
+    title: {
+      absolute: pageTitle,
+    },
+    description: pageDescription,
     alternates: {
-      canonical: `https://urest-kr.netlify.app/shop/${resolvedParams.id}`,
+      canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${shop.name} | 유레스트(Urest) 프리미엄 제휴점`,
-      description: `${shop.name} 코스 및 가격 정보 안내. 100% 안심 현장 결제로 편안하게 이용해 보세요.`,
-      url: `https://urest-kr.netlify.app/shop/${resolvedParams.id}`,
+      title: pageTitle,
+      description: pageDescription,
+      url: canonicalUrl,
       siteName: "유레스트(Urest)",
       locale: "ko_KR",
       type: "website",
@@ -275,8 +327,20 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ShopDetailPage({ params }: PageProps) {
   const resolvedParams = await params;
-  const shopId = resolvedParams.id;
-  const shop = shopData[shopId] || shopData["1"];
+  const targetId = resolvedParams.id || resolvedParams.shopId || "1";
+  const shop = shopData[targetId];
+
+  if (!shop) {
+    notFound();
+  }
+
+  const region = resolvedParams.region || "seoul";
+  const districtName = safeDecode(resolvedParams.district);
+  const locationPrefix = parseLocationText(region, resolvedParams.district);
+
+  const displayTitle = locationPrefix 
+    ? `${locationPrefix} 출장 힐링 마사지 - ${shop.name}`
+    : shop.name;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -284,11 +348,12 @@ export default async function ShopDetailPage({ params }: PageProps) {
     "name": `${shop.name} - 유레스트`,
     "description": shop.desc,
     "telephone": shop.phone,
-    "url": `https://urest-kr.netlify.app/shop/${shopId}`,
+    "url": `https://urest-kr.netlify.app/${region}/${encodeURIComponent(districtName)}/shop/${targetId}`,
     "image": `https://urest-kr.netlify.app${shop.image}`,
     "address": {
       "@type": "PostalAddress",
-      "addressRegion": "수도권(서울, 경기, 인천)",
+      "addressLocality": districtName || "수도권",
+      "addressRegion": getRegionFullName(region),
       "addressCountry": "KR"
     },
     "priceRange": "$$"
@@ -316,8 +381,12 @@ export default async function ShopDetailPage({ params }: PageProps) {
             </div>
           </Link>
           
-          <Link href="/" className="text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/30 hover:bg-amber-500 hover:text-black transition-all">
-            🏠 메인 홈으로
+          {/* 🌟 구 목록으로 안전하게 돌아가는 링크 */}
+          <Link 
+            href={districtName ? `/${region}/${encodeURIComponent(districtName)}` : "/"} 
+            className="text-xs font-bold text-amber-400 bg-amber-500/10 px-3 py-1.5 rounded-xl border border-amber-500/30 hover:bg-amber-500 hover:text-black transition-all"
+          >
+            ← {districtName ? `${districtName} 목록` : "메인 홈으로"}
           </Link>
         </div>
       </header>
@@ -340,11 +409,11 @@ export default async function ShopDetailPage({ params }: PageProps) {
 
           <div className="p-6 md:p-8 space-y-4 -mt-8 relative z-10">
             <div className="inline-block bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-xl text-amber-400 text-xs font-bold">
-              📍 {shop.location}
+              📍 {locationPrefix ? `${locationPrefix} 24시 신속 방문` : shop.location}
             </div>
 
-            <h1 className="text-2xl md:text-4xl font-black text-white">
-              {shop.name}
+            <h1 className="text-2xl md:text-3xl font-black text-white">
+              {displayTitle}
             </h1>
 
             <p className="text-xs md:text-sm text-gray-300 leading-relaxed bg-black/60 p-4 rounded-2xl border border-white/5">
@@ -365,7 +434,9 @@ export default async function ShopDetailPage({ params }: PageProps) {
         <section className="bg-[#0f0f13] border border-amber-500/20 p-6 md:p-8 rounded-3xl space-y-6">
           <div className="text-center">
             <span className="text-amber-400 text-xs font-bold tracking-widest uppercase">PROGRAM & PRICE</span>
-            <h2 className="text-xl md:text-2xl font-black text-white mt-1">💎 정규 코스 및 요금 안내</h2>
+            <h2 className="text-xl md:text-2xl font-black text-white mt-1">
+              💎 {locationPrefix ? `${locationPrefix} ` : ""}정규 코스 및 요금 안내
+            </h2>
           </div>
 
           <div className="space-y-6">
@@ -395,7 +466,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 pt-1">
                   {courseGroup.items.map((item, itemIdx) => (
                     <div 
-                      key={itemIdx}
+                      key={itemIdx} 
                       className={`p-3.5 rounded-xl border flex justify-between items-center ${
                         item.recommend 
                           ? "bg-amber-500/10 border-amber-500/40 shadow-[0_0_15px_rgba(245,158,11,0.1)]" 
@@ -419,7 +490,7 @@ export default async function ShopDetailPage({ params }: PageProps) {
         {/* 안내사항 */}
         <section className="bg-black/80 p-5 rounded-2xl border border-white/10">
           <h3 className="text-amber-400 font-bold text-sm mb-2 flex items-center gap-1.5">
-            <span>📌</span> 이용 예약 안내
+            <span>📌</span> {locationPrefix ? `${locationPrefix} ` : ""}이용 예약 안내
           </h3>
           <ul className="text-xs text-gray-300 space-y-1.5 list-disc list-inside">
             <li>유레스트 제휴업체는 <strong>100% 현장 결제</strong>로 운영됩니다. 출발 전 선입금을 절대 요구하지 않습니다.</li>
@@ -433,13 +504,13 @@ export default async function ShopDetailPage({ params }: PageProps) {
       <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#08080a]/95 backdrop-blur-xl border-t border-amber-500/30 p-3 md:p-4 shadow-[0_-10px_25px_rgba(0,0,0,0.8)]">
         <div className="max-w-4xl mx-auto grid grid-cols-2 gap-3">
           <a 
-            href={`tel:${shop.phone}`}
+            href={`tel:${shop.phone.replace(/-/g, "")}`}
             className="flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-black font-black py-3.5 rounded-2xl text-xs md:text-sm shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-transform active:scale-95"
           >
             <span className="text-lg">📞</span> 전화로 즉시예약
           </a>
           <a 
-            href={`sms:${shop.phone}?body=${encodeURIComponent(`${shop.name} 예약 문의드립니다. (유레스트 보고 연락드렸습니다)`)}`}
+            href={`sms:${shop.phone.replace(/-/g, "")}?body=${encodeURIComponent(`[${locationPrefix || "유레스트"}] ${shop.name} 예약 문의드립니다.`)}`}
             className="flex items-center justify-center gap-2 bg-neutral-900 hover:bg-neutral-800 text-white font-black py-3.5 rounded-2xl text-xs md:text-sm border border-white/10 hover:border-amber-500/40 transition-transform active:scale-95"
           >
             <span className="text-lg">💬</span> 간편 문자상담

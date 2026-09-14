@@ -5,19 +5,20 @@ import NavigationHeader from "./NavigationHeader";
 export const metadata: Metadata = {
   metadataBase: new URL("https://urest-kr.netlify.app"),
   title: {
-    default: "유레스트 | 서울·경기·인천 프리미엄 웰니스 테라피 플랫폼",
+    default: "유레스트 | 서울·경기·인천 프리미엄 웰니스 마사지 & 바디 테라피 안내",
     template: "%s | 유레스트"
   },
-  description: "서울, 경기, 인천 전 지역 프리미엄 바디케어 & 웰니스 테라피 전문 플랫폼 유레스트(Urest). 선입금 없는 100% 현장 결제, 검증된 제휴 센터 코스 및 실시간 일정 안내.",
+  description: "서울, 경기, 인천 전 지역 프리미엄 웰니스 마사지 및 바디케어 테라피 전문 플랫폼 유레스트(Urest). 정직한 정찰제 요금과 검증된 제휴 센터 코스 및 프로그램 안내.",
   keywords: [
     "유레스트",
     "Urest",
-    "서울 테라피",
-    "경기 테라피",
-    "인천 테라피",
+    "서울 마사지",
+    "경기 마사지",
+    "인천 마사지",
     "웰니스 바디케어",
+    "스웨디시 마사지",
     "아로마 테라피",
-    "타이 릴렉싱",
+    "타이마사지",
     "프리미엄 테라피",
     "서울 웰니스",
     "경기 웰니스",
@@ -32,8 +33,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "유레스트 | 서울·경기·인천 프리미엄 테라피 플랫폼",
-    description: "선입금 없는 100% 현장 결제 안심 예약! 수도권 프리미엄 테라피 안심 가이드.",
+    title: "유레스트 | 서울·경기·인천 프리미엄 웰니스 마사지 플랫폼",
+    description: "투명한 정찰제 요금과 쾌적한 힐링 프로그램! 수도권 프리미엄 마사지 & 테라피 제휴 안내.",
     url: "https://urest-kr.netlify.app",
     siteName: "유레스트",
     locale: "ko_KR",

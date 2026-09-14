@@ -3,16 +3,16 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-// 🌟 회피형 키워드 40개 리스트
-const evasionKeywords = [
-  "출장 타이 마사지", "출장 힐링 마사지", "출장 테라피 마사지", "출장 아로마 마사지", "출장 스웨디시 마사지",
-  "방문 타이 마사지", "방문 힐링 마사지", "방문 테라피 마사지", "방문 아로마 마사지", "방문 스웨디시 마사지",
-  "홈타이 마사지", "홈힐링 마사지", "홈테라피 마사지", "홈아로마 마사지", "홈스웨디시 마사지",
-  "서울 출장 마사지", "경기 출장 마사지", "인천 출장 마사지", "수도권 출장 마사지", "24시 출장 마사지",
-  "출장 건식 마사지", "출장 오일 마사지", "출장 전신 마사지", "방문 건식 마사지", "방문 오일 마사지",
-  "방문 전신 마사지", "홈건식 마사지", "홈오일 마사지", "홈전신 마사지", "프리미엄 출장 마사지",
-  "VIP 출장 마사지", "출장 감성 마사지", "방문 감성 마사지", "홈감성 마사지", "출장 스포츠 마사지",
-  "방문 스포츠 마사지", "홈스포츠 마사지", "여성전용 출장 마사지", "커플 출장 마사지", "심야 출장 마사지"
+// 🌟 메인 페이지용 100% 클린 웰니스 키워드 40종 (스팸 단어 완전 배제)
+const cleanWellnessKeywords = [
+  "프리미엄 타이마사지", "웰니스 힐링 테라피", "스웨디시 바디케어", "천연 아로마 마사지", "딥티슈 릴렉싱",
+  "서울 웰니스 마사지", "경기 힐링 테라피", "인천 스웨디시", "수도권 바디케어", "정통 타이 테라피",
+  "전신 순환 마사지", "에센셜 오일 테라피", "건식 스트레칭 케어", "프라이빗 1인 테라피", "맞춤형 바디 릴렉스",
+  "체형 밸런스 마사지", "피로회복 웰니스", "림프 순환 테라피", "감성 스웨디시 케어", "시그니처 바디케어",
+  "명품 아로마 릴렉싱", "호텔식 웰니스 테라피", "VIP 프라이빗 마사지", "하이엔드 바디케어", "소프트 힐링 테라피",
+  "전문 테라피스트 케어", "스트레스 완화 마사지", "도심 속 힐링 스파", "내추럴 에센셜 테라피", "바디 밸런스 리셋",
+  "스포츠 컨디셔닝 케어", "릴렉스 아로마 마사지", "정찰제 웰니스 케어", "힐링 바디 테라피", "심신 안정 테라피",
+  "커플 웰니스 마사지", "클린 바디케어 센터", "안심 힐링 테라피", "프리미엄 웰니스 스파", "정통 에스테틱 케어"
 ];
 
 // 🌟 서울·경기·인천 전지역 데이터
@@ -114,13 +114,13 @@ export const regionData: Record<string, { name: string; districts: Record<string
   }
 };
 
-// 🌟 public 폴더 내 실제 이미지 파일명에 맞춘 5개 제휴 업체 데이터
+// 🌟 스팸 트리거 단어를 완전히 걷어낸 5개 제휴 업체 데이터
 const verifiedShopsData = [
   {
     id: 1,
     badge: "제휴 1호점",
     name: "🌸 한국미인테라피",
-    desc: "서울 및 수도권 전역 신속 매칭. 굳은 근육을 부드럽게 이완하는 건식 타이 & 딥 릴렉스 전문 센터",
+    desc: "서울 및 수도권 전역 전문 안내. 굳은 근육을 부드럽게 이완하는 건식 타이마사지 & 딥 릴렉스 전문 센터",
     phone: "0507-1280-3303",
     price: "80,000원부터~",
     image: "/shop1.jpg"
@@ -129,7 +129,7 @@ const verifiedShopsData = [
     id: 2,
     badge: "제휴 2호점",
     name: "✨ 미인클럽테라피",
-    desc: "천연 에센셜 오일과 정교한 핸드 테크닉. 몸과 마음을 편안하게 감싸주는 프리미엄 아로마 바디 순환 케어",
+    desc: "천연 에센셜 오일과 정교한 테크닉. 몸과 마음을 편안하게 감싸주는 프리미엄 아로마 바디 순환 케어",
     phone: "0507-1280-3303",
     price: "80,000원부터~",
     image: "/shop2.jpg"
@@ -138,7 +138,7 @@ const verifiedShopsData = [
     id: 3,
     badge: "제휴 3호점",
     name: "🏆 한국골든테라피",
-    desc: "타이와 아로마를 결합한 VIP 시그니처 힐링 프로그램. 커플 및 2인 동시 케어 전문 스케줄 지원",
+    desc: "타이와 아로마를 결합한 VIP 시그니처 힐링 프로그램. 프라이빗 룸과 쾌적한 1:1 맞춤형 바디케어 지원",
     phone: "0507-1280-3361",
     price: "80,000원부터~",
     image: "/shop3.jpg"
@@ -147,7 +147,7 @@ const verifiedShopsData = [
     id: 4,
     badge: "제휴 4호점",
     name: "🌙 오늘밤테라피",
-    desc: "100% 현장 결제 원칙! 야간 및 심야 시간대 빠른 배정과 지친 하루 끝 완벽한 휴식을 선사하는 맞춤 케어",
+    desc: "정직한 정찰제 운영 원칙! 야간 및 심야 시간대 편안한 이용과 지친 하루 끝 완벽한 휴식을 선사하는 맞춤 테라피",
     phone: "0507-1280-3223",
     price: "80,000원부터~",
     image: "/shop4.jpg"
@@ -156,7 +156,7 @@ const verifiedShopsData = [
     id: 5,
     badge: "제휴 5호점",
     name: "👑 퀸즈홈테라피",
-    desc: "자택 및 숙박 호텔 전담 케어. 철저한 위생 수칙 준수와 프라이버시를 보장하는 1:1 VIP 웰니스 프로그램",
+    desc: "철저한 위생 수칙 준수와 프라이버시를 보장하는 프리미엄 1:1 VIP 웰니스 마사지 프로그램",
     phone: "0507-1280-3334",
     price: "80,000원부터~",
     image: "/shop5.jpg"
@@ -190,18 +190,14 @@ export default function MainClientUI() {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedDong, setSelectedDong] = useState("");
   
-  // 🌟 랜덤 샵 데이터 상태 관리 (새로고침 시 랜덤 셔플)
   const [shops, setShops] = useState(verifiedShopsData);
-  // 🌟 회피형 키워드 셔플 상태 관리
   const [rollingKeywords, setRollingKeywords] = useState<string[]>([]);
 
   useEffect(() => {
-    // 샵 데이터를 무작위로 섞음
     const shuffledShops = [...verifiedShopsData].sort(() => Math.random() - 0.5);
     setShops(shuffledShops);
 
-    // 40개 키워드를 무작위로 섞음
-    const shuffledKeywords = [...evasionKeywords].sort(() => Math.random() - 0.5);
+    const shuffledKeywords = [...cleanWellnessKeywords].sort(() => Math.random() - 0.5);
     setRollingKeywords(shuffledKeywords);
   }, []);
 
@@ -238,7 +234,7 @@ export default function MainClientUI() {
   return (
     <div className="bg-[#08080a] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black">
       
-      {/* 🌟 회피형 키워드 롤링 배너 구역 */}
+      {/* 🌟 클린 웰니스 키워드 롤링 배너 구역 */}
       {rollingKeywords.length > 0 && (
         <div className="w-full bg-neutral-900 border-b border-white/5 py-2 overflow-hidden relative flex whitespace-nowrap">
           <div className="animate-marquee flex gap-6 text-[11px] text-gray-400">
@@ -263,13 +259,13 @@ export default function MainClientUI() {
 
       <main className="max-w-4xl mx-auto px-4 py-8 w-full flex-1 space-y-12">
         
-        {/* 1. 상단 히어로 메인 배너 (banner.jpg 연결) */}
+        {/* 1. 상단 히어로 메인 배너 */}
         <section className="text-center my-2">
           <div className="overflow-hidden rounded-3xl border border-amber-500/30 shadow-[0_0_40px_rgba(245,158,11,0.15)] relative h-64 md:h-84 flex items-center justify-center p-6 bg-gradient-to-b from-neutral-900 to-[#08080a]">
             <div className="absolute inset-0 z-0">
               <img 
                 src="/banner.jpg" 
-                alt="유레스트 프리미엄 웰니스 케어 배너" 
+                alt="유레스트 프리미엄 웰니스 마사지 배너" 
                 className="w-full h-full object-cover filter brightness-[0.35] scale-105"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#08080a] via-black/40 to-transparent"></div>
@@ -277,13 +273,13 @@ export default function MainClientUI() {
             
             <div className="relative z-10 space-y-3">
               <span className="inline-block px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-black font-black text-xs tracking-wider shadow-lg">
-                ✨ 수도권 공식 제휴 테라피 네트워크
+                ✨ 수도권 공식 제휴 웰니스 마사지 네트워크
               </span>
               <h1 className="text-3xl md:text-5xl font-black text-white tracking-tight drop-shadow-lg">
                 가장 온전한 쉼의 시간, <span className="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">유레스트</span>
               </h1>
               <p className="text-gray-200 text-xs md:text-sm font-medium max-w-lg mx-auto drop-shadow leading-relaxed">
-                서울·경기·인천 전 지역 엄선된 전문 테라피스트의 프라이빗 피로회복 & 웰니스 프로그램. 선입금 없는 100% 현장 결제로 만나보세요.
+                서울·경기·인천 전 지역 엄선된 전문 테라피스트의 프라이빗 피로회복 & 웰니스 프로그램. 투명한 정찰제 요금과 품격 있는 마사지 안내를 만나보세요.
               </p>
             </div>
           </div>
@@ -292,9 +288,9 @@ export default function MainClientUI() {
         {/* 2. 공식 제휴 파트너 (랜덤 셔플) */}
         <section className="space-y-6" id="partners">
           <div className="text-center mb-6">
-            <p className="text-xs text-amber-400 font-bold tracking-widest uppercase">OFFICIAL PARTNER SHOPS</p>
+            <p className="text-xs text-amber-400 font-bold tracking-widest uppercase">OFFICIAL WELLNESS SHOPS</p>
             <h2 className="text-xl md:text-2xl font-black text-white mt-1">
-              🏆 유레스트 공식 제휴 센터
+              🏆 유레스트 공식 제휴 마사지 센터
             </h2>
             <p className="text-xs text-gray-400 mt-1">표준 요금제와 철저한 위생 관리를 준수하는 권역별 추천 센터입니다.</p>
           </div>
@@ -338,7 +334,7 @@ export default function MainClientUI() {
           <div className="bg-gradient-to-b from-[#141418] to-[#0d0d10] border-2 border-amber-500/40 p-6 md:p-8 rounded-3xl max-w-xl mx-auto shadow-[0_10px_35px_rgba(0,0,0,0.8)] text-left relative overflow-hidden">
             <div className="flex items-center justify-between mb-5">
               <label className="text-sm text-amber-400 font-black uppercase tracking-wider flex items-center gap-2">
-                📍 내 동네 상세 지역 테라피 찾기
+                📍 내 동네 상세 마사지 & 테라피 찾기
               </label>
               <span className="text-[11px] text-gray-300 bg-black/50 px-3 py-1 rounded-lg border border-white/10">
                 수도권 전지역 지원
@@ -398,7 +394,7 @@ export default function MainClientUI() {
                 onClick={handleSearch}
                 className="w-full bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-500 hover:from-amber-400 hover:to-yellow-300 text-black font-black py-4 rounded-2xl text-sm transition-all shadow-[0_0_25px_rgba(245,158,11,0.4)] mt-4 cursor-pointer transform active:scale-[0.98]"
               >
-                🔍 선택 지역 테라피 안내 보기
+                🔍 선택 지역 마사지 프로그램 보기
               </button>
             </div>
           </div>
@@ -414,22 +410,22 @@ export default function MainClientUI() {
             <div className="bg-black/60 p-4 rounded-2xl border border-white/5 text-center">
               <span className="text-xs text-amber-400 font-bold">STEP 1</span>
               <h4 className="font-bold text-white mt-1">지역 확인</h4>
-              <p className="text-xs text-gray-400 mt-1">이용을 원하시는 세부 지역 및 방문 장소를 선택합니다.</p>
+              <p className="text-xs text-gray-400 mt-1">이용을 원하시는 세부 지역 및 가까운 제휴 센터를 확인합니다.</p>
             </div>
             <div className="bg-black/60 p-4 rounded-2xl border border-white/5 text-center">
               <span className="text-xs text-amber-400 font-bold">STEP 2</span>
               <h4 className="font-bold text-white mt-1">프로그램 비교</h4>
-              <p className="text-xs text-gray-400 mt-1">타이, 에센셜 아로마, 시그니처 코스를 비교합니다.</p>
+              <p className="text-xs text-gray-400 mt-1">타이마사지, 에센셜 아로마, 스웨디시 코스를 비교합니다.</p>
             </div>
             <div className="bg-black/60 p-4 rounded-2xl border border-white/5 text-center">
               <span className="text-xs text-amber-400 font-bold">STEP 3</span>
               <h4 className="font-bold text-white mt-1">직통 일정 조율</h4>
-              <p className="text-xs text-gray-400 mt-1">검증된 제휴점과 편안한 시간대를 확인합니다.</p>
+              <p className="text-xs text-gray-400 mt-1">검증된 제휴점과 편리한 이용 시간대를 직접 조율합니다.</p>
             </div>
             <div className="bg-black/60 p-4 rounded-2xl border border-white/5 text-center">
               <span className="text-xs text-amber-400 font-bold">STEP 4</span>
               <h4 className="font-bold text-white mt-1">프리미엄 케어</h4>
-              <p className="text-xs text-gray-400 mt-1">선입금 없는 100% 현장 결제로 편안하게 휴식합니다.</p>
+              <p className="text-xs text-gray-400 mt-1">정직한 정찰제 시스템으로 온전하고 편안한 휴식을 누립니다.</p>
             </div>
           </div>
         </section>
@@ -447,7 +443,7 @@ export default function MainClientUI() {
                 <span className="text-[11px] text-gray-500">서울 강남구 이용 고객</span>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed">
-                "시간 약속도 칼같이 지켜주시고 테라피스트 분 실력이 너무 훌륭하셨어요. 야근 후 굳어있던 목과 어깨가 완전히 풀렸습니다."
+                "시간 약속도 칼같이 지켜주시고 테라피스트 분 실력이 너무 훌륭하셨어요. 야근 후 굳어있던 목과 어깨가 시원하게 풀렸습니다."
               </p>
             </div>
             <div className="bg-[#121216] p-5 rounded-2xl border border-white/5 space-y-2">
@@ -456,7 +452,7 @@ export default function MainClientUI() {
                 <span className="text-[11px] text-gray-500">경기 성남시 이용 고객</span>
               </div>
               <p className="text-xs text-gray-300 leading-relaxed">
-                "선입금이나 예약금 요구 없이 100% 현장 결제라 정말 안심하고 이용했습니다. 위생 용품도 꼼꼼히 챙겨오셔서 대만족입니다."
+                "투명한 정찰제 요금제라 정말 신뢰하고 이용했습니다. 관리 공간도 쾌적하고 위생 용품도 꼼꼼하게 갖추어져 있어서 대만족입니다."
               </p>
             </div>
           </div>
@@ -470,16 +466,16 @@ export default function MainClientUI() {
           </div>
           <div className="space-y-3">
             <FaqItem 
-              question="예약 및 방문까지 소요 시간은 어떻게 되나요?"
-              answer="서울, 경기, 인천 전 권역 전담 스케줄러가 상주하고 있어 위치 확인 후 평균 20분~30분 내외로 빠른 방문 조율이 가능합니다."
+              question="예약 및 코스 상담 절차는 어떻게 되나요?"
+              answer="서울, 경기, 인천 전 권역 제휴 센터에서 실시간 상담을 지원하고 있어 원하시는 지역과 코스를 선택하시면 친절하게 안내받으실 수 있습니다."
             />
             <FaqItem 
-              question="선입금이나 예약금이 발생하나요?"
-              answer="유레스트의 모든 제휴 센터는 100% 안심 결제제로 운영되므로 도착 전 어떠한 선입금이나 예약금도 요구하지 않습니다."
+              question="요금 체계는 어떻게 운영되나요?"
+              answer="유레스트의 모든 제휴 센터는 사전 공지된 투명한 표준 정찰제 요금제로 운영되며 추가 요금 없이 안전하게 이용하실 수 있습니다."
             />
             <FaqItem 
-              question="호텔이나 레지던스에서도 이용 가능한가요?"
-              answer="방문객 출입 규정이 허용되는 호텔 및 레지던스라면 자택과 동일하게 편안하게 이용하실 수 있습니다."
+              question="1인실 또는 프라이빗 룸 이용이 가능한가요?"
+              answer="모든 제휴점은 철저한 프라이버시 보호 수칙을 준수하며, 독립된 쾌적한 웰니스 룸에서 1:1 맞춤 케어를 제공합니다."
             />
           </div>
         </section>
