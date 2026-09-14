@@ -91,7 +91,9 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
   const finalDescription = pattern.desc(locationKeyword);
 
   return {
-    title: finalTitle,
+    title: {
+      absolute: finalTitle, // 🌟 템플릿을 무시하고 이 타이틀만 정확히 단독 출력됨
+    },
     description: finalDescription,
     keywords: [
       `${simpleLocation} 웰니스`,
@@ -100,8 +102,7 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
       `${simpleLocation} 스웨디시`,
       `${simpleLocation} 아로마테라피`,
       `${simpleLocation} 바디케어`,
-      `${locationKeyword} 힐링센터`,
-      "유레스트"
+      `${locationKeyword} 힐링센터`,      
     ],
     alternates: {
       canonical: `https://urest-kr.netlify.app/${region}/${encodeURIComponent(districtName)}${dongName ? `?dong=${encodeURIComponent(dongName)}` : ""}`,
