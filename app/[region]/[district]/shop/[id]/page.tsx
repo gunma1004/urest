@@ -35,11 +35,84 @@ function safeDecode(str?: string): string {
   return decoded.trim();
 }
 
-// 🌟 구 이름만 정확히 조합하는 함수
 function parseDistrictLocation(region?: string, district?: string): string {
   const regionName = getRegionFullName(region);
   const decodedDistrict = safeDecode(district);
   return `${regionName} ${decodedDistrict}`.replace(/\s+/g, " ").trim();
+}
+
+// 🌟 1. 수식어 300개 이상 풀 생성기 ('출장' 완전 배제)
+function getModifiersPool(): string[] {
+  const baseAdjectives = [
+    "프라이빗한", "전문적인", "쾌적한 공간의", "안락한 분위기 속", "정성 어린 손길의", 
+    "신뢰할 수 있는", "차분한 힐링", "품격 있는", "맞춤형 바디케어", "일상 회복을 위한",
+    "엄선된 제휴점의", "편안한 휴식을 선사하는", "체계적인 프로그램의", "도심 속 오아시스", "부드러운 릴렉싱",
+    "고품격 웰니스", "피로 회복 맞춤형", "안정감 있는", "조용하고 아늑한", "에너지 충전을 위한",
+    "릴렉싱 바디케어", "프리미엄 힐링", "상쾌한 활력을 주는", "정성 가득한", "지친 몸을 위한"
+  ];
+  const intensityWords = [
+    "깊은", "부드러운", "섬세한", "꼼꼼한", "완벽한", 
+    "탁월한", "특별한", "차별화된", "노련한", "깔끔한",
+    "포근한", "산뜻한"
+  ];
+  const pool: string[] = [];
+  for (const adj of baseAdjectives) {
+    for (const int of intensityWords) {
+      pool.push(`${int} ${adj}`);
+    }
+  }
+  return pool; // 총 300개 충족
+}
+
+// 🌟 2. 서비스 종류 150개 풀 생성기 ('마사지' 필수 포함, '출장' 배제)
+function getServiceTypesPool(): string[] {
+  const coreTechniques = ["스웨디시", "아로마", "타이", "스포츠", "힐링", "바디케어", "릴렉싱", "웰니스", "전문", "프리미엄", "감성", "토탈"];
+  const styles = [
+    "감성 마사지 코스", "맞춤형 마사지 프로그램", "전신 관리 마사지", "전문 테크닉 마사지", 
+    "집중 이완 마사지", "릴렉스 마사지 과정", "힐링 마사지 프로그램", "프리미엄 바디 마사지", 
+    "맞춤형 바디 마사지", "토탈 마사지 솔루션", "바디 릴렉싱 마사지", "시그니처 마사지"
+  ];
+  const pool: string[] = [];
+  for (const tech of coreTechniques) {
+    for (const style of styles) {
+      pool.push(`${tech} 기반의 ${style}`);
+      pool.push(`${tech} 전문 ${style}`);
+      if (pool.length >= 150) break;
+    }
+    if (pool.length >= 150) break;
+  }
+  return pool;
+}
+
+// 🌟 3. 상세 설명 100개 풀 생성기 ('출장' 배제)
+function getDescriptionsPool(): string[] {
+  const actions = [
+    "숙련된 테라피스트의 세심한 손길로 진행되는 전문 마사지 프로그램은", 
+    "엄선된 제휴 샵에서 제공하는 맞춤형 마사지 서비스는", 
+    "지친 일상 속에서 찾아가는 힐링 마사지 코스는", 
+    "안락한 공간에서 즐기는 전문적인 테라피 마사지는", 
+    "체계적인 프로그램을 통해 제공되는 프라이빗 마사지 솔루션은", 
+    "부드러운 테크닉이 돋보이는 릴렉스 중심의 바디 마사지 안내는"
+  ];
+  const effects = [
+    "몸과 마음의 피로를 부드럽게 씻어내 줍니다.",
+    "온전한 휴식과 재충전의 시간을 선사합니다.",
+    "지친 신체 리듬을 편안하게 되찾아드립니다.",
+    "일상의 스트레스를 말끔히 해소해 줍니다.",
+    "최상의 릴렉스와 안락함을 제공합니다.",
+    "몸의 긴장을 풀고 가벼운 활력을 채워줍니다.",
+    "오래도록 지속되는 편안한 안정감을 전해드립니다.",
+    "누적된 근육의 긴장을 개운하게 이완시켜 줍니다."
+  ];
+  const pool: string[] = [];
+  for (const act of actions) {
+    for (const eff of effects) {
+      pool.push(`${act} ${eff}`);
+      if (pool.length >= 100) break;
+    }
+    if (pool.length >= 100) break;
+  }
+  return pool;
 }
 
 const shopData: Record<string, {
@@ -61,7 +134,7 @@ const shopData: Record<string, {
     phone: "0507-1280-3361",
     badge: "VIP 골든 힐링 케어",
     image: "/shop3.jpg",
-    desc: "골든 품격의 감성 릴렉싱! 전문 한국인 관리사와 프리미엄 힐러진이 계신 곳으로 직접 찾아가 굳은 근육과 묵은 피로를 시원하게 풀어드립니다.",
+    desc: "골든 품격의 감성 릴렉싱! 전문 한국인 관리사와 프리미엄 힐러진의 정성 어린 1:1 맞춤 테라피로 굳은 근육과 묵은 피로를 시원하게 풀어드립니다.",
     courses: [
       {
         category: "👑 한국인 골든 스웨디시",
@@ -82,14 +155,14 @@ const shopData: Record<string, {
         ]
       }
     ],
-    features: ["100% 현장 후불제", "수도권 전지역 25분 칼도착", "24시간 365일 연중무휴", "철저한 위생 및 방역 관리"]
+    features: ["100% 현장 후불제", "수도권 전지역 쾌적한 케어", "24시간 365일 연중무휴", "철저한 위생 및 방역 관리"]
   },
   "2": {
     name: "한국미인테라피",
     phone: "0507-1280-3303",
     badge: "재방문율 최우수",
     image: "/shop1.jpg",
-    desc: "품격 있는 힐링을 선사하는 프라이빗 홈케어! 프리미엄 출장 아로마 마사지와 맞춤형 바디케어로 지친 일상의 활력을 되찾아보세요.",
+    desc: "품격 있는 힐링을 선사하는 프라이빗 케어 센터! 프리미엄 아로마 프로그램과 맞춤형 바디케어로 지친 일상의 활력을 되찾아보세요.",
     courses: [
       {
         category: "🌿 아로마 테라피 코스",
@@ -110,14 +183,14 @@ const shopData: Record<string, {
         ]
       }
     ],
-    features: ["선입금 ZERO 100% 현장 결제", "전문 힐러 상시 대기", "철저한 프라이빗 보장", "맞춤형 방문 케어"]
+    features: ["선입금 ZERO 100% 현장 결제", "전문 힐러 상시 대기", "철저한 프라이빗 보장", "맞춤형 웰니스 케어"]
   },
   "3": {
     name: "미인클럽테라피",
     phone: "0507-1280-3303",
     badge: "만족도 1위 추천",
     image: "/shop2.jpg",
-    desc: "재방문율 1위 만족도! 정통 릴렉싱 케어부터 올인원 VVIP 스페셜까지 계신 곳에서 편안하게 정통 힐링을 누려보세요.",
+    desc: "재방문율 1위 만족도! 정통 릴렉싱 케어부터 올인원 VVIP 스페셜까지 쾌적한 공간에서 편안하게 정통 힐링을 누려보세요.",
     courses: [
       {
         category: "01 RELAX | 전신 릴렉싱 스트레칭",
@@ -149,14 +222,14 @@ const shopData: Record<string, {
         ]
       }
     ],
-    features: ["선입금 없는 100% 현장 결제", "평균 25분 빠른 방문", "24시간 상담 가능", "최고급 오일 사용"]
+    features: ["선입금 없는 100% 현장 결제", "평균 25분 빠른 안내", "24시간 상담 가능", "최고급 오일 사용"]
   },
   "4": {
     name: "퀸즈홈테라피",
     phone: "0507-1280-3334",
     badge: "여왕처럼 누리는 VIP",
     image: "/shop5.jpg",
-    desc: "여왕처럼 누리는 고품격 테라피! 전문 테라피스트의 품격 있는 1:1 맞춤 방문 바디케어 서비스.",
+    desc: "여왕처럼 누리는 고품격 테라피! 전문 테라피스트의 품격 있는 1:1 맞춤 웰니스 바디케어 서비스.",
     courses: [
       {
         category: "01 DRY | 릴렉싱 건식 코스",
@@ -178,14 +251,14 @@ const shopData: Record<string, {
         ]
       }
     ],
-    features: ["100% 현장 결제 안심 시스템", "전문 테라피스트 배정", "수도권 전지역 방문", "24시간 예약 가능"]
+    features: ["100% 현장 결제 안심 시스템", "전문 테라피스트 배정", "수도권 전지역 제휴", "24시간 예약 가능"]
   },
   "5": {
     name: "오늘밤테라피",
     phone: "0507-1280-3223",
     badge: "야간 힐링 만족 1위",
     image: "/shop4.jpg",
-    desc: "선입금 없는 100% 현장 결제! 깊은 밤 지친 하루의 피로를 완벽하게 날려버릴 나이트 맞춤 방문 힐링 케어.",
+    desc: "선입금 없는 100% 현장 결제! 깊은 밤 지친 하루의 피로를 완벽하게 날려버릴 나이트 맞춤 웰니스 힐링 케어.",
     courses: [
       {
         category: "01 DRY | 🧠 건식 테라피 코스",
@@ -207,7 +280,7 @@ const shopData: Record<string, {
         ]
       }
     ],
-    features: ["100% 안심 현장 결제", "수도권 전지역 25분 칼도착", "심야 24시 상시 운영", "개인 맞춤 압 조절"]
+    features: ["100% 안심 현장 결제", "수도권 전지역 쾌적한 샵", "심야 24시 상시 운영", "개인 맞춤 압 조절"]
   }
 };
 
@@ -218,55 +291,44 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   const locationPrefix = parseDistrictLocation(resolvedParams.region, resolvedParams.district);
 
-  const titleVariants = [
-    `${locationPrefix} 출장 방문 릴렉스 마사지 · ${shop.name}`,
-    `${locationPrefix} 출장 프라이빗 맞춤 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 웰니스 바디 마사지 | ${shop.name}`,
-    `${locationPrefix} 출장 케어 전신 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 스웨디시 힐링 마사지 · ${shop.name}`,
-    `${locationPrefix} 출장 아로마 오일 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 홈케어 맞춤 마사지 | ${shop.name}`,
-    `${locationPrefix} 출장 럭셔리 스파 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 감성 테라피 마사지 · ${shop.name}`,
-    `${locationPrefix} 출장 정통 바디 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 1:1 커스텀 마사지 | ${shop.name}`,
-    `${locationPrefix} 출장 안심 힐링 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 프리미엄 케어 마사지 · ${shop.name}`,
-    `${locationPrefix} 출장 소프트 릴렉싱 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 신속방문 스웨디시 마사지 | ${shop.name}`,
-    `${locationPrefix} 출장 전문 웰니스 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 딥티슈 바디 마사지 · ${shop.name}`,
-    `${locationPrefix} 출장 커스텀 아로마 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 VIP 힐링 마사지 | ${shop.name}`,
-    `${locationPrefix} 출장 스페셜 맞춤 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 안심 홈케어 마사지 · ${shop.name}`,
-    `${locationPrefix} 출장 프리미엄 릴렉스 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 피로해소 전신 마사지 | ${shop.name}`,
-    `${locationPrefix} 출장 맞춤형 스웨디시 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 힐링 테라피 마사지 · ${shop.name}`,
-    `${locationPrefix} 출장 실속형 바디 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 쾌적한 방문 마사지 | ${shop.name}`,
-    `${locationPrefix} 출장 종합 웰니스 마사지 - ${shop.name}`,
-    `${locationPrefix} 출장 최고급 감성 마사지 · ${shop.name}`
-  ];
+  const modifiersPool = getModifiersPool();
+  const serviceTypesPool = getServiceTypesPool();
+  const descriptionsPool = getDescriptionsPool();
 
-  const charSum = (locationPrefix + shop.name + targetId).split("").reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  const variantIndex = Math.abs(charSum) % titleVariants.length;
+  const seedString = locationPrefix + targetId + "urest_clean_district_shop_seo";
+  const charSum = seedString.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+  
+  const modIndex = charSum % modifiersPool.length;
+  const serviceIndex = (charSum * 3) % serviceTypesPool.length;
+  const descIndex = (charSum * 7) % descriptionsPool.length;
 
-  const pageTitle = titleVariants[variantIndex];
-  const pageDescription = `${locationPrefix} 24시 신속 방문 출장 타이 & 아로마 마사지 전문 ${shop.name}. 선입금 없는 100% 현장 결제로 안심하고 이용하세요.`;
+  const selectedModifier = modifiersPool[modIndex];
+  const selectedService = serviceTypesPool[serviceIndex];
+  const selectedDesc = descriptionsPool[descIndex];
+
+  // 🌟 샵 이름, 사이트 이름, '출장' 키워드가 완전히 배제된 고유 메타 태그
+  const finalTitle = `${locationPrefix} ${selectedModifier} 제휴점의 ${selectedService}`;
+  const finalDescription = `${locationPrefix} 맞춤형 힐링 네트워크. ${selectedModifier} 진행되는 ${selectedService}. ${selectedDesc}`;
 
   const canonicalUrl = `https://urest-kr.netlify.app/${resolvedParams.region}/${encodeURIComponent(safeDecode(resolvedParams.district))}/shop/${targetId}`;
 
   return {
-    title: { absolute: pageTitle },
-    description: pageDescription,
+    title: { absolute: finalTitle },
+    description: finalDescription,
     alternates: { canonical: canonicalUrl },
+    keywords: [
+      `${locationPrefix} 타이 마사지`,
+      `${locationPrefix} 아로마 마사지`,
+      `${locationPrefix} 릴렉스 마사지`,
+      `${locationPrefix} 스웨디시 마사지`,
+      `${locationPrefix} 힐링 마사지`,
+      `${locationPrefix} 전신 마사지`,
+      `${locationPrefix} 24시 마사지`,
+    ],
     openGraph: {
-      title: pageTitle,
-      description: pageDescription,
+      title: finalTitle,
+      description: finalDescription,
       url: canonicalUrl,
-      siteName: "유레스트(Urest)",
       locale: "ko_KR",
       type: "website",
       images: [{ url: shop.image, width: 800, height: 600, alt: shop.name }],
@@ -286,6 +348,8 @@ export default async function DistrictShopDetailPage({ params }: PageProps) {
   const region = resolvedParams.region || "seoul";
   const districtName = safeDecode(resolvedParams.district);
   const locationPrefix = parseDistrictLocation(region, resolvedParams.district);
+
+  const displayTitle = `${locationPrefix} 전문 웰니스 테라피 마사지`;
 
   return (
     <div className="bg-[#08080a] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black pb-28">
@@ -320,7 +384,7 @@ export default async function DistrictShopDetailPage({ params }: PageProps) {
           <div className="relative h-64 md:h-80 w-full overflow-hidden">
             <img 
               src={shop.image} 
-              alt={`${locationPrefix} 출장 마사지 - ${shop.name}`} 
+              alt={displayTitle} 
               className="w-full h-full object-cover filter brightness-[0.55]" 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#121216] via-transparent to-black/30"></div>
@@ -331,11 +395,11 @@ export default async function DistrictShopDetailPage({ params }: PageProps) {
 
           <div className="p-6 md:p-8 space-y-4 -mt-8 relative z-10">
             <div className="inline-block bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-xl text-amber-400 text-xs font-bold">
-              📍 {locationPrefix} 출장 타이·아로마·릴렉스 마사지 24시 신속 방문
+              📍 {locationPrefix} 웰니스 마사지 제휴 안내
             </div>
 
             <h1 className="text-2xl md:text-3xl font-black text-white">
-              {locationPrefix} 출장마사지 24시 안내 - <span className="text-amber-400">{shop.name}</span>
+              {displayTitle}
             </h1>
 
             <p className="text-xs md:text-sm text-gray-300 leading-relaxed bg-black/60 p-4 rounded-2xl border border-white/5">
@@ -357,7 +421,7 @@ export default async function DistrictShopDetailPage({ params }: PageProps) {
           <div className="text-center">
             <span className="text-amber-400 text-xs font-bold tracking-widest uppercase">PROGRAM & PRICE</span>
             <h2 className="text-xl md:text-2xl font-black text-white mt-1">
-              💎 {locationPrefix} 출장 마사지 코스 및 요금 안내
+              💎 {locationPrefix} 정규 코스 및 요금 안내
             </h2>
           </div>
 
@@ -411,11 +475,11 @@ export default async function DistrictShopDetailPage({ params }: PageProps) {
         {/* 안내사항 */}
         <section className="bg-black/80 p-5 rounded-2xl border border-white/10">
           <h3 className="text-amber-400 font-bold text-sm mb-2 flex items-center gap-1.5">
-            <span>📌</span> {locationPrefix} 마사지 안심 이용 안내
+            <span>📌</span> {locationPrefix} 안심 이용 안내
           </h3>
           <ul className="text-xs text-gray-300 space-y-1.5 list-disc list-inside">
             <li>모든 제휴 업체는 <strong>100% 현장 후불제</strong>로만 운영되며, 사전 선입금이나 예약금을 절대 요구하지 않습니다.</li>
-            <li>원하시는 시간 20~30분 전에 문의해 주시면 출장 타이 마사지, 출장 아로마 마사지, 출장 릴렉스 마사지 전문 테라피스트가 신속하게 방문합니다.</li>
+            <li>원하시는 시간 언제든지 쾌적한 웰니스 프로그램을 안내받으실 수 있습니다.</li>
           </ul>
         </section>
 
@@ -431,7 +495,7 @@ export default async function DistrictShopDetailPage({ params }: PageProps) {
             <span className="text-lg">📞</span> 전화로 즉시예약
           </a>
           <a 
-            href={`sms:${shop.phone.replace(/-/g, "")}?body=${encodeURIComponent(`[${locationPrefix}] ${shop.name} 출장마사지 예약 문의드립니다. (유레스트 보고 연락드렸어요)`)}`}
+            href={`sms:${shop.phone.replace(/-/g, "")}?body=${encodeURIComponent(`[${locationPrefix}] 예약 문의드립니다.`)}`}
             className="flex items-center justify-center gap-2 bg-neutral-900 hover:bg-neutral-800 text-white font-black py-3.5 rounded-2xl text-xs md:text-sm border border-white/10 hover:border-amber-500/40 transition-transform active:scale-95"
           >
             <span className="text-lg">💬</span> 간편 문자상담
