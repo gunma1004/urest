@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const allRoutes: MetadataRoute.Sitemap = [...mainRoute, ...categoryRoutes, ...shopRoutes];
 
-  // 4. 지역 및 행정구역 데이터 정의
+  // 4. 지역 및 행정구역 데이터 정의 (오타 및 중복 정비 완료)
   const regionMap: Record<string, { name: string; districts: Record<string, { name: string; dongs: string[] }> }> = {
     seoul: {
       name: "서울특별시",
@@ -57,7 +57,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         gangseo: { name: "강서구", dongs: ["염창동", "등촌동", "화곡동", "우장산동", "가양동", "발산동", "공항동", "방화동"] },
         guro: { name: "구로구", dongs: ["신도림동", "구로동", "가리봉동", "고척동", "개봉동", "오류동", "수궁동", "항동"] },
         geumcheon: { name: "금천구", dongs: ["가산동", "독산동", "시흥동"] },
-        yeongdeungpo: { name: "영등포동", dongs: ["영등포동", "여의동", "당산동", "도림동", "문래동", "양평동", "신길동", "대림동"] },
+        yeongdeungpo: { name: "영등포구", dongs: ["영등포동", "여의동", "당산동", "도림동", "문래동", "양평동", "신길동", "대림동"] },
         dongjak: { name: "동작구", dongs: ["노량진동", "상도동", "흑석동", "사당동", "대방동", "신대방동"] },
         gwanak: { name: "관악구", dongs: ["보라매동", "청림동", "성현동", "행운동", "낙성대동", "청룡동", "은천동", "중앙동", "인헌동", "남현동", "서원동", "신원동", "서림동", "신사동", "난향동", "조원동", "대학동", "삼성동", "미성동", "난곡동"] },
         seocho: { name: "서초구", dongs: ["서초동", "잠원동", "반포동", "방배동", "양재동", "내곡동"] },
@@ -105,7 +105,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         icheon: { name: "이천시", dongs: ["창전동", "중리동", "증포동", "부발읍", "장호원읍"] },
         anseong: { name: "안성시", dongs: ["공도읍", "죽산면", "삼죽면", "보개면", "금광면", "서운면", "미양면", "대덕면", "원곡면", "양성면", "안성동"] },
         gimpo: { name: "김포시", dongs: ["고촌읍", "통진읍", "대곶면", "월곶면", "하성면", "사우동", "풍무동", "장기동", "구래동", "운양동", "마산동"] },
-        hwaseong: { name: "화성시", dunnigs: ["봉담읍", "우정읍", "향남읍", "남양읍", "새솔동", "진안동", "병점동", "반월동", "기배동", "화산동", "동탄동"], dongs: ["봉담읍", "우정읍", "향남읍", "남양읍", "새솔동", "진안동", "병점동", "반월동", "기배동", "화산동", "동탄동"] },
+        hwaseong: { name: "화성시", dongs: ["봉담읍", "우정읍", "향남읍", "남양읍", "새솔동", "진안동", "병점동", "반월동", "기배동", "화산동", "동탄동"] },
         gwangju: { name: "광주시", dongs: ["오포읍", "초월읍", "퇴촌면", "남종면", "남한산성면", "송정동", "광남동"] },
         yangju: { name: "양주시", dongs: ["회천동", "양주동", "백석읍", "은현면", "남면", "장흥면"] },
         pocheon: { name: "포천시", dongs: ["소흘읍", "군내면", "내촌면", "가산면", "일동면", "이동면", "영중면", "창수면", "관인면", "화현면", "포천동", "선단동"] },
@@ -163,12 +163,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         });
       }
 
-      // 4. 세부 동 페이지 및 동 단위 샵 상세 페이지 (인코딩 안전 처리)
+      // 4. 세부 동 페이지 및 동 단위 샵 상세 페이지
       if (distInfo.dongs && Array.isArray(distInfo.dongs)) {
         for (const dong of distInfo.dongs) {
           const encodedDong = encodeURI(dong);
 
-          // 형태 A: 쿼리스트링 방식 (?dong=...)
+          // 쿼리스트링 방식 (?dong=...)
           allRoutes.push({
             url: `${baseUrl}/${cityKey}/${encodeURI(distName)}?dong=${encodedDong}`,
             lastModified,
@@ -176,7 +176,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.85,
           });
 
-          // 형태 B: 슬래시 경로 방식 (/[dong])
+          // 슬래시 경로 방식 (/[dong])
           allRoutes.push({
             url: `${baseUrl}/${cityKey}/${encodeURI(distName)}/${encodedDong}`,
             lastModified,
@@ -184,7 +184,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.85,
           });
 
-          // 동 단위 샵 상세 페이지 (예: /seoul/서대문구/북아현동/shop/2)
+          // 동 단위 샵 상세 페이지
           for (const sId of shopIds) {
             allRoutes.push({
               url: `${baseUrl}/${cityKey}/${encodeURI(distName)}/${encodedDong}/shop/${sId}`,
