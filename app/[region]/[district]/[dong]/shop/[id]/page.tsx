@@ -43,7 +43,7 @@ function parseDongLocation(region?: string, district?: string, dong?: string): s
   return `${regionName} ${decodedDistrict} ${decodedDong}`.replace(/\s+/g, " ").trim();
 }
 
-// 🌟 1. 수식어 300개 이상 풀 생성기 ('출장'과 '마사지' 분산 포함)
+// 🌟 1. 수식어 300개 이상 풀 ('출장'과 '마사지' 분산)
 function getModifiersPool(): string[] {
   const baseAdjectives = [
     "프라이빗한", "전문적인", "쾌적한 공간의", "안락한 분위기 속", "정성 어린 손길의", 
@@ -65,38 +65,37 @@ function getModifiersPool(): string[] {
       pool.push(`고객 맞춤형 출장 케어를 선사하는 ${int} ${adj}`);
     }
   }
-  return pool;
+  return pool; // 총 300개 이상
 }
 
-// 🌟 2. 서비스 종류 150개 풀 생성기 ('출장'과 '마사지'가 분산된 형태)
+// 🌟 2. 서비스 종류 150개 이상 풀 ('출장'과 '마사지' 분산)
 function getServiceTypesPool(): string[] {
   const coreTechniques = ["스웨디시", "아로마", "타이", "스포츠", "힐링", "바디케어", "릴렉싱", "웰니스", "전문", "프리미엄", "감성", "토탈"];
   const styles = [
-    "감성 마사지 코스", "맞춤형 마사지 프로그램", "전신 관리 마사지", "전문 테크닉 마사지", 
+    "감성 중심의 마사지 코스", "맞춤형 마사지 프로그램", "전신 관리 마사지", "전문 테크닉 마사지", 
     "집중 이완 마사지", "릴렉스 마사지 과정", "힐링 마사지 프로그램", "프리미엄 바디 마사지", 
     "맞춤형 바디 마사지", "토탈 마사지 솔루션", "바디 릴렉싱 마사지", "시그니처 마사지"
   ];
   const pool: string[] = [];
   for (const tech of coreTechniques) {
     for (const style of styles) {
-      pool.push(`${tech} 기반의 ${style}`);
-      pool.push(`${tech} 전문 ${style}`);
-      if (pool.length >= 150) break;
+      pool.push(`출장 방문을 통해 진행되는 ${tech} ${style}`);
+      pool.push(`출장 홈케어로 제공되는 ${tech} ${style}`);
+      if (pool.length >= 200) break;
     }
-    if (pool.length >= 150) break;
+    if (pool.length >= 200) break;
   }
   return pool;
 }
 
-// 🌟 3. 상세 설명 100개 풀 생성기 ('출장'과 '마사지'가 문장 내에서 분산된 형태)
+// 🌟 3. 상세 설명 100개 이상 풀 ('출장'과 '마사지' 분산)
 function getDescriptionsPool(): string[] {
   const actions = [
     "숙련된 테라피스트가 고객 계신 곳으로 직접 출장하여 진행하는 전문 마사지 프로그램은", 
     "엄선된 제휴 샵에서 출장 형태로 제공하는 맞춤형 마사지 서비스는", 
     "지친 일상 속에서 편안하게 불러보는 출장 힐링 마사지 코스는", 
     "안락한 공간에서 즐기는 전문적인 출장 테라피 마사지는", 
-    "체계적인 손길을 통해 출장 서비스로 제공되는 프라이빗 마사지 솔루션은", 
-    "부드러운 테크닉이 돋보이는 릴렉스 중심의 출장 바디 마사지 안내는"
+    "체계적인 손길을 통해 출장 서비스로 제공되는 프라이빗 마사지 솔루션은"
   ];
   const effects = [
     "몸과 마음의 피로를 부드럽게 씻어내 줍니다.",
@@ -104,9 +103,7 @@ function getDescriptionsPool(): string[] {
     "지친 신체 리듬을 편안하게 되찾아드립니다.",
     "일상의 스트레스를 말끔히 해소해 줍니다.",
     "최상의 릴렉스와 안락함을 제공합니다.",
-    "몸의 긴장을 풀고 가벼운 활력을 채워줍니다.",
-    "오래도록 지속되는 편안한 안정감을 전해드립니다.",
-    "누적된 근육의 긴장을 개운하게 이완시켜 줍니다."
+    "몸의 긴장을 풀고 가벼운 활력을 채워줍니다."
   ];
   const pool: string[] = [];
   for (const act of actions) {
@@ -291,15 +288,13 @@ const shopData: Record<string, {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const targetId = resolvedParams.id || resolvedParams.shopId || "1";
-  const shop = shopData[targetId] || shopData["1"];
-
   const locationPrefix = parseDongLocation(resolvedParams.region, resolvedParams.district, resolvedParams.dong);
 
   const modifiersPool = getModifiersPool();
   const serviceTypesPool = getServiceTypesPool();
   const descriptionsPool = getDescriptionsPool();
 
-  const seedString = locationPrefix + shop.name + targetId + "urest_clean_seo";
+  const seedString = locationPrefix + targetId + "urest_massive_pool_seo";
   const charSum = seedString.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
   
   const modIndex = charSum % modifiersPool.length;
@@ -310,7 +305,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const selectedService = serviceTypesPool[serviceIndex];
   const selectedDesc = descriptionsPool[descIndex];
 
-  // 🌟 도메인/샵 이름 제외, '출장'과 '마사지'가 분산된 고유 메타 태그
+  // 🌟 1,000개 이상의 조합 중 하나로 유니크하게 생성되는 메타 태그 (도메인/샵 이름 제외, 출장-마사지 분산)
   const finalTitle = `${locationPrefix} ${selectedModifier} 제휴점의 ${selectedService}`;
   const finalDescription = `${locationPrefix} 맞춤형 힐링 네트워크. ${selectedModifier} 진행되는 ${selectedService}. ${selectedDesc}`;
 
@@ -333,10 +328,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: finalTitle,
       description: finalDescription,
       url: canonicalUrl,
-      siteName: "유레스트(Urest)",
       locale: "ko_KR",
       type: "website",
-      images: [{ url: shop.image, width: 800, height: 600, alt: shop.name }],
     },
   };
 }
@@ -355,7 +348,7 @@ export default async function DongShopDetailPage({ params }: PageProps) {
   const dongName = safeDecode(resolvedParams.dong);
   const locationPrefix = parseDongLocation(region, resolvedParams.district, resolvedParams.dong);
 
-  const displayTitle = `${locationPrefix} 전문 방문 출장 타이 힐링 마사지`;
+  const displayTitle = `${locationPrefix} 전문 출장 서비스를 지원하는 프리미엄 웰니스 마사지`;
 
   return (
     <div className="bg-[#08080a] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black pb-28">
@@ -401,7 +394,7 @@ export default async function DongShopDetailPage({ params }: PageProps) {
 
           <div className="p-6 md:p-8 space-y-4 -mt-8 relative z-10">
             <div className="inline-block bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-xl text-amber-400 text-xs font-bold">
-              📍 {locationPrefix} 신속 방문 케어 네트워크
+              📍 {locationPrefix} 전문 출장 서비스를 지원하는 웰니스 마사지 네트워크
             </div>
 
             <h1 className="text-2xl md:text-3xl font-black text-white">
