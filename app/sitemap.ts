@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   const allRoutes: MetadataRoute.Sitemap = [...mainRoute, ...categoryRoutes, ...shopRoutes];
 
-  // 4. 서울, 경기, 인천 지역 및 구·동·샵 상세 구조 전체 순회 매핑 (데이터 객체 직접 내장)
+  // 4. 서울, 경기, 인천 지역 데이터 정의
   const regionMap: Record<string, { name: string; districts: Record<string, { name: string; dongs: string[] }> }> = {
     seoul: {
       name: "서울특별시",
@@ -127,14 +127,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         gyeyang: { name: "계양구", dongs: ["효성동", "계산동", "작전동", "작전서운동", "계양동"] },
         seohae: { name: "서해구", dongs: ["연희동", "청라동", "가정동", "신현원창동", "석남동", "가좌동"] },
         geomdan: { name: "검단동", dongs: ["검단동", "불로대곡동", "원당동", "당하동", "오류왕길동", "마전동", "아라동"] },
-        ganghwa: { name: "강화군", dongs: ["강화읍", "선원면", "불은면", "길상면", "화도면", "양도면", "내가면", "하점면", "양사면", "송해면", "교동면", "삼산면", "서도면"] },
+        ganghwa: { name: "강화군", dongs: ["강화읍", "선원면", "불은면", "길상면", "화도면", "양동면", "내가면", "하점면", "양사면", "송해면", "교동면", "삼산면", "서도면"] },
         ongjin: { name: "옹진군", dongs: ["북도면", "연평면", "백령면", "대청면", "덕적면", "자월면", "영흥면"] }
       }
     }
   };
 
   for (const [cityKey, regInfo] of Object.entries(regionMap)) {
-    // 시/도 페이지
+    // 1. 시/도 페이지
     allRoutes.push({
       url: `${baseUrl}/${cityKey}`,
       lastModified,
@@ -145,7 +145,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     for (const [districtKey, distInfo] of Object.entries(regInfo.districts)) {
       const distName = distInfo.name;
 
-      // 구/시/군 페이지
+      // 2. 구/시/군 페이지
       allRoutes.push({
         url: `${baseUrl}/${cityKey}/${encodeURIComponent(distName)}`,
         lastModified,
@@ -153,7 +153,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.9,
       });
 
-      // 구 단위 샵 상세 페이지
+      // 3. 구 단위 샵 상세 페이지
       for (const sId of shopIds) {
         allRoutes.push({
           url: `${baseUrl}/${cityKey}/${encodeURIComponent(distName)}/shop/${sId}`,
@@ -163,12 +163,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         });
       }
 
-      // 세부 동 페이지 및 동 단위 샵 상세 페이지
+      // 4. 세부 동 페이지 (두 가지 형태 모두 지원: 쿼리스트링 방식 및 슬래시 경로 방식)
       if (distInfo.dongs && Array.isArray(distInfo.dongs)) {
         for (const dong of distInfo.dongs) {
           const encodedDong = encodeURIComponent(dong);
 
-          // 동 페이지 (예: /seoul/종로구/창신동)
+          // 형태 A: 쿼리 파라미터 방식 (예: /seoul/노원구?dong=중계본동)
+          allRoutes.push({
+            url: `${baseUrl}/${cityKey}/${encodeURIComponent(distName)}?dong=${encodedDong}`,
+            lastModified,
+            changeFrequency: 'daily',
+            priority: 0.85,
+          });
+
+          // 형태 B: 슬래시 경로 방식 (예: /seoul/노원구/중계본동)
           allRoutes.push({
             url: `${baseUrl}/${cityKey}/${encodeURIComponent(distName)}/${encodedDong}`,
             lastModified,
@@ -176,7 +184,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             priority: 0.85,
           });
 
-          // 동 단위 샵 상세 페이지 (예: /seoul/종로구/창신동/shop/1)
+          // 동 단위 샵 상세 페이지 (슬래시 경로 기반)
           for (const sId of shopIds) {
             allRoutes.push({
               url: `${baseUrl}/${cityKey}/${encodeURIComponent(distName)}/${encodedDong}/shop/${sId}`,
