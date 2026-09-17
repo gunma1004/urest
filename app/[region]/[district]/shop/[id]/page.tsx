@@ -41,77 +41,39 @@ function parseDistrictLocation(region?: string, district?: string): string {
   return `${regionName} ${decodedDistrict}`.replace(/\s+/g, " ").trim();
 }
 
-// 🌟 1. 수식어 300개 이상 풀 ('출장'과 '마사지' 분산)
+// 🌟 1,000개 이상의 유니크 조합을 만드는 수식어 풀 ('출장'과 '마사지' 분산)
 function getModifiersPool(): string[] {
   const baseAdjectives = [
-    "프라이빗한", "전문적인", "쾌적한 공간의", "안락한 분위기 속", "정성 어린 손길의", 
-    "신뢰할 수 있는", "차분한 힐링", "품격 있는", "맞춤형 바디케어", "일상 회복을 위한",
-    "엄선된 제휴점의", "편안한 휴식을 선사하는", "체계적인 프로그램의", "도심 속 오아시스", "부드러운 릴렉싱",
-    "고품격 웰니스", "피로 회복 맞춤형", "안정감 있는", "조용하고 아늑한", "에너지 충전을 위한",
-    "릴렉싱 바디케어", "프리미엄 힐링", "상쾌한 활력을 주는", "정성 가득한", "지친 몸을 위한"
+    "프라이빗", "전문", "쾌적한 공간", "안락한 분위기", "정성 어린", 
+    "신뢰할 수 있는", "차분한 힐링", "품격 있는", "맞춤형 바디케어", "일상 회복",
+    "엄선된 웰니스", "편안한 휴식", "체계적인 프로그램", "도심 속 오아시스", "부드러운 릴렉싱",
+    "고품격 케어", "피로 회복 맞춤", "안정감 있는", "조용하고 아늑한", "에너지 충전"
   ];
+  
   const intensityWords = [
     "깊은", "부드러운", "섬세한", "꼼꼼한", "완벽한", 
     "탁월한", "특별한", "차별화된", "노련한", "깔끔한",
-    "포근한", "산뜻한"
+    "포근한", "산뜻한", "정교한", "개운한"
   ];
-  const pool: string[] = [];
-  for (const adj of baseAdjectives) {
-    for (const int of intensityWords) {
-      pool.push(`신속한 출장 서비스를 제공하는 ${int} ${adj}`);
-      pool.push(`편안한 출장 홈케어를 지향하는 ${int} ${adj}`);
-      pool.push(`고객 맞춤형 출장 케어를 선사하는 ${int} ${adj}`);
-    }
-  }
-  return pool; // 총 300개 이상
-}
 
-// 🌟 2. 서비스 종류 150개 이상 풀 ('출장'과 '마사지' 분산)
-function getServiceTypesPool(): string[] {
-  const coreTechniques = ["스웨디시", "아로마", "타이", "스포츠", "힐링", "바디케어", "릴렉싱", "웰니스", "전문", "프리미엄", "감성", "토탈"];
-  const styles = [
-    "감성 중심의 마사지 코스", "맞춤형 마사지 프로그램", "전신 관리 마사지", "전문 테크닉 마사지", 
-    "집중 이완 마사지", "릴렉스 마사지 과정", "힐링 마사지 프로그램", "프리미엄 바디 마사지", 
-    "맞춤형 바디 마사지", "토탈 마사지 솔루션", "바디 릴렉싱 마사지", "시그니처 마사지"
+  const serviceCategories = [
+    "출장 중심의 웰니스 마사지",
+    "방문 케어를 돕는 스웨디시 마사지",
+    "출장 홈케어 전문 아로마 마사지",
+    "신속한 방문을 지원하는 타이 마사지",
+    "프라이빗 출장 전용 힐링 마사지",
+    "맞춤형 홈케어 프로그램 마사지"
   ];
-  const pool: string[] = [];
-  for (const tech of coreTechniques) {
-    for (const style of styles) {
-      pool.push(`출장 방문을 통해 진행되는 ${tech} ${style}`);
-      pool.push(`출장 홈케어로 제공되는 ${tech} ${style}`);
-      if (pool.length >= 200) break;
-    }
-    if (pool.length >= 200) break;
-  }
-  return pool;
-}
 
-// 🌟 3. 상세 설명 100개 이상 풀 ('출장'과 '마사지' 분산)
-function getDescriptionsPool(): string[] {
-  const actions = [
-    "숙련된 테라피스트가 고객 계신 곳으로 직접 출장하여 진행하는 전문 마사지 프로그램은", 
-    "엄선된 제휴 샵에서 출장 형태로 제공하는 맞춤형 마사지 서비스는", 
-    "지친 일상 속에서 편안하게 불러보는 출장 힐링 마사지 코스는", 
-    "안락한 공간에서 즐기는 전문적인 출장 테라피 마사지는", 
-    "체계적인 손길을 통해 출장 서비스로 제공되는 프라이빗 마사지 솔루션은"
-  ];
-  const effects = [
-    "몸과 마음의 피로를 부드럽게 씻어내 줍니다.",
-    "온전한 휴식과 재충전의 시간을 선사합니다.",
-    "지친 신체 리듬을 편안하게 되찾아드립니다.",
-    "일상의 스트레스를 말끔히 해소해 줍니다.",
-    "최상의 릴렉스와 안락함을 제공합니다.",
-    "몸의 긴장을 풀고 가벼운 활력을 채워줍니다."
-  ];
   const pool: string[] = [];
-  for (const act of actions) {
-    for (const eff of effects) {
-      pool.push(`${act} ${eff}`);
-      if (pool.length >= 100) break;
+  for (const cat of serviceCategories) {
+    for (const adj of baseAdjectives) {
+      for (const int of intensityWords) {
+        pool.push(`${int} ${adj} ${cat}`);
+      }
     }
-    if (pool.length >= 100) break;
   }
-  return pool;
+  return pool; // 총 1,680개의 방대한 유니크 조합 풀
 }
 
 const shopData: Record<string, {
@@ -289,23 +251,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const locationPrefix = parseDistrictLocation(resolvedParams.region, resolvedParams.district);
 
   const modifiersPool = getModifiersPool();
-  const serviceTypesPool = getServiceTypesPool();
-  const descriptionsPool = getDescriptionsPool();
-
-  const seedString = locationPrefix + targetId + "urest_massive_district_shop_seo";
+  const seedString = locationPrefix + targetId + "urest_massive_district_shop_seo_v2";
   const charSum = seedString.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-  
   const modIndex = charSum % modifiersPool.length;
-  const serviceIndex = (charSum * 3) % serviceTypesPool.length;
-  const descIndex = (charSum * 7) % descriptionsPool.length;
 
   const selectedModifier = modifiersPool[modIndex];
-  const selectedService = serviceTypesPool[serviceIndex];
-  const selectedDesc = descriptionsPool[descIndex];
 
-  // 🌟 1,000개 이상의 조합 중 하나로 유니크하게 생성되는 메타 태그 (도메인/샵 이름 제외, 출장-마사지 분산)
-  const finalTitle = `${locationPrefix} ${selectedModifier} 제휴점의 ${selectedService}`;
-  const finalDescription = `${locationPrefix} 맞춤형 힐링 네트워크. ${selectedModifier} 진행되는 ${selectedService}. ${selectedDesc}`;
+  // 🌟 깔끔하고 짧으면서도 1,600+ 유니크 조합으로 매칭되는 타이틀 및 설명
+  const finalTitle = `${locationPrefix} ${selectedModifier}`;
+  const finalDescription = `${locationPrefix} 맞춤형 웰니스 바디케어. ${selectedModifier} 프로그램 안내 및 표준 정찰제 요금 비교.`;
 
   const canonicalUrl = `https://urest-kr.netlify.app/${resolvedParams.region}/${encodeURIComponent(safeDecode(resolvedParams.district))}/shop/${targetId}`;
 
@@ -345,7 +299,7 @@ export default async function DistrictShopDetailPage({ params }: PageProps) {
   const districtName = safeDecode(resolvedParams.district);
   const locationPrefix = parseDistrictLocation(region, resolvedParams.district);
 
-  const displayTitle = `${locationPrefix} 전문 출장 서비스를 지원하는 프리미엄 웰니스 마사지`;
+  const displayTitle = `${locationPrefix} 전문 방문 출장 타이 힐링 마사지`;
 
   return (
     <div className="bg-[#08080a] text-gray-100 min-h-screen flex flex-col font-sans selection:bg-amber-500 selection:text-black pb-28">
@@ -391,7 +345,7 @@ export default async function DistrictShopDetailPage({ params }: PageProps) {
 
           <div className="p-6 md:p-8 space-y-4 -mt-8 relative z-10">
             <div className="inline-block bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-xl text-amber-400 text-xs font-bold">
-              📍 {locationPrefix} 전문 출장 서비스를 지원하는 웰니스 마사지 네트워크
+              📍 {locationPrefix} 신속 방문 케어 네트워크
             </div>
 
             <h1 className="text-2xl md:text-3xl font-black text-white">
