@@ -5,7 +5,7 @@ base_url = "https://urest-kr.netlify.app"
 shop_ids = ["1", "2", "3", "4", "5"]
 categories = ["services", "prices", "travel", "places", "reviews"]
 
-# 🌟 수원시 영통구(suwon_yeongtong) 및 성북구를 포함한 수도권 전지역 완벽 수록 데이터
+# 🌟 수도권 전지역 (성북구, 수원시 영통구, 안양시 동안구 등 포함) 완벽 수록 데이터
 region_map = {
     "seoul": {
         "name": "서울특별시",
@@ -120,20 +120,24 @@ for city_key, reg_info in region_map.items():
         dist_name = dist_info["name"]
         encoded_dist = quote(dist_name, safe='')
         
-        # 구 페이지
+        # 1. 구 페이지
         urls.append(f"{base_url}/{city_key}/{encoded_dist}")
         
-        # 구 샵 상세
+        # 2. 구 샵 상세
         for s_id in shop_ids:
             urls.append(f"{base_url}/{city_key}/{encoded_dist}/shop/{s_id}")
             
-        # 동 순회
+        # 3. 동 순회 (쿼리스트링 및 슬래시 경로 모두 생성)
         for dong in dist_info["dongs"]:
             encoded_dong = quote(dong, safe='')
+            
+            # 쿼리스트링 방식 (예: /gyeonggi/안양시%20동안구?dong=부흥동)
             urls.append(f"{base_url}/{city_key}/{encoded_dist}?dong={encoded_dong}")
+            
+            # 슬래시 경로 방식 (예: /gyeonggi/안양시%20동안구/부흥동)
             urls.append(f"{base_url}/{city_key}/{encoded_dist}/{encoded_dong}")
             
-            # 동 샵 상세
+            # 동 단위 샵 상세 페이지
             for s_id in shop_ids:
                 urls.append(f"{base_url}/{city_key}/{encoded_dist}/{encoded_dong}/shop/{s_id}")
 
@@ -154,4 +158,4 @@ os.makedirs("public", exist_ok=True)
 with open("public/sitemap.xml", "w", encoding="utf-8") as f:
     f.write("\n".join(xml_content))
 
-print(f"✅ 수원시 영통구를 포함한 총 {len(urls)}개의 URL이 public/sitemap.xml에 완벽하게 생성되었습니다!")
+print(f"✅ 쿼리스트링 및 슬래시 동 주소를 포함한 총 {len(urls)}개의 URL이 public/sitemap.xml에 완벽하게 생성되었습니다!")
