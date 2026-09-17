@@ -5,7 +5,7 @@ base_url = "https://urest-kr.netlify.app"
 shop_ids = ["1", "2", "3", "4", "5"]
 categories = ["services", "prices", "travel", "places", "reviews"]
 
-# 🌟 서울(성북구 포함), 경기, 인천 전지역 완벽 수록 데이터
+# 🌟 수원시 영통구(suwon_yeongtong) 및 성북구를 포함한 수도권 전지역 완벽 수록 데이터
 region_map = {
     "seoul": {
         "name": "서울특별시",
@@ -154,4 +154,4 @@ os.makedirs("public", exist_ok=True)
 with open("public/sitemap.xml", "w", encoding="utf-8") as f:
     f.write("\n".join(xml_content))
 
-print(f"✅ 성북구를 포함한 총 {len(urls)}개의 URL이 public/sitemap.xml에 완벽하게 생성되었습니다!")
+print(f"✅ 수원시 영통구를 포함한 총 {len(urls)}개의 URL이 public/sitemap.xml에 완벽하게 생성되었습니다!")
